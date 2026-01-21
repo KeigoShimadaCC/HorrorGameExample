@@ -1,0 +1,46 @@
+{
+    "id": "storage_closet",
+    "name": "Storage Closet",
+    "backgroundImage": "/images/scenes/storage_closet.png",
+    "backgroundImageLowSanity": "/images/scenes/storage_closet.png",
+    "ambientAudio": "room_silence_breathing",
+    "interactables": [
+        {
+            "id": "salt_pouch",
+            "label": "Salt Pouch",
+            "rect": {
+                "x": 15.0,
+                "y": 76.67,
+                "width": 15.0,
+                "height": 17.78
+            },
+            "examineText": "A small pouch of coarse salt, hung above the doorframe.",
+            "givesItem": "salt_pouch",
+            "setsFlag": "found_salt_pouch"
+        },
+        {
+            "id": "talisman_box",
+            "label": "Wooden Box",
+            "rect": {
+                "x": 55.0,
+                "y": 67.78,
+                "width": 20.0,
+                "height": 26.67
+            },
+            "examineText": "A lacquered box containing a braided talisman.",
+            "givesItem": "ritual_talisman"
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "hallway",
+            "label": "Back to Hallway",
+            "position": {
+                "x": 70.0,
+                "y": 103.33,
+                "width": 20.0,
+                "height": 26.67
+            }
+        }
+    ]
+}

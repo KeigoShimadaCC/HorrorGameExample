@@ -14,8 +14,25 @@ export interface Ending {
 
 export const ENDINGS: Ending[] = [
     {
+        id: "ritual_bargain",
+        name: "Ritual Bargain",
+        conditions: {
+            requiredFlags: ["performed_ritual"]
+        },
+        priority: 120,
+    },
+    {
+        id: "escape_true",
+        name: "True Escape",
+        conditions: {
+            sanityRange: [40, 100],
+            requiredFlags: ["found_car_keys", "found_shrine_map", "got_outside"]
+        },
+        priority: 110,
+    },
+    {
         id: "cosmic_truth",
-        name: "深淵を理解した (You Understood the Abyss)",
+        name: "豺ｱ豺ｵ繧堤炊隗｣縺励◆ (You Understood the Abyss)",
         conditions: {
             requiredFlags: ["read_forbidden_book", "learned_covenant", "seen_entity_origin"]
         },
@@ -23,7 +40,7 @@ export const ENDINGS: Ending[] = [
     },
     {
         id: "consumed",
-        name: "呑まれた (Consumed)",
+        name: "蜻代∪繧後◆ (Consumed)",
         conditions: {
             sanityRange: [0, 0]
         },
@@ -31,7 +48,7 @@ export const ENDINGS: Ending[] = [
     },
     {
         id: "escape_broken",
-        name: "逃げた、しかし (Escaped, But...)",
+        name: "騾・￡縺溘√＠縺九＠ (Escaped, But...)",
         conditions: {
             sanityRange: [1, 30],
             requiredFlags: ["found_car_keys"],
@@ -40,8 +57,18 @@ export const ENDINGS: Ending[] = [
         priority: 80,
     },
     {
+        id: "sealed_in",
+        name: "Sealed In",
+        conditions: {
+            sanityRange: [1, 20],
+            requiredFlags: ["sealed_hallway"],
+            forbiddenFlags: ["got_outside"]
+        },
+        priority: 75,
+    },
+    {
         id: "escape_clean",
-        name: "夜明け (Dawn)",
+        name: "螟懈・縺・(Dawn)",
         conditions: {
             sanityRange: [60, 100],
             requiredFlags: ["found_car_keys", "survived_until_dawn"]

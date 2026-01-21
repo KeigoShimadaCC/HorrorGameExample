@@ -1,61 +1,124 @@
 {
-  "id": "entry_hall",
-  "name": "Entry Hall",
-  "backgroundImage": "/images/scenes/entry_hall.png",
-  "backgroundImageLowSanity": "/images/scenes/entry_hall_distorted.png",
-  "ambientAudio": "/audio/rain_indoor.mp3",
-  "interactables": [
-    {
-      "id": "shoes",
-      "label": "Strange Shoes",
-      "rect": {
-        "x": 10,
-        "y": 70,
-        "width": 15,
-        "height": 10
-      },
-      "examineText": "Muddy shoes. They look too large for anyone in your family.",
-      "sanityCost": 5,
-      "audioTrigger": "/audio/sfx/step_squelch.mp3"
-    },
-    {
-      "id": "mail_pile",
-      "label": "Mail",
-      "rect": {
-        "x": 60,
-        "y": 65,
-        "width": 10,
-        "height": 5
-      },
-      "examineText": "Bills, flyers, and... a letter from Grandmother.",
-      "givesItem": "grandmother_letter"
-    },
-    {
-      "id": "family_photo",
-      "label": "Photo",
-      "rect": {
-        "x": 40,
-        "y": 30,
-        "width": 10,
-        "height": 15
-      },
-      "examineText": "A family portrait. Why is your face scratched out?",
-      "examineTextLowSanity": "They are all looking at you. Why are they looking at you?",
-      "sanityCost": 10
-    }
-  ],
-  "navigation": [
-    {
-      "targetSceneId": "hallway",
-      "label": "To Hallway",
-      "position": {
-        "x": 80,
-        "y": 20,
-        "width": 15,
-        "height": 60
-      },
-      "requiredFlag": "read_letter",
-      "lockedText": "I shouldn't leave until I check the mail."
-    }
-  ]
+    "id": "entry_hall",
+    "name": "Entry Hall",
+    "backgroundImage": "/images/scenes/entry_hall.png",
+    "backgroundImageLowSanity": "/images/scenes/entry_hall_distorted.png",
+    "ambientAudio": "entry_rain",
+    "interactables": [
+        {
+            "id": "shoes",
+            "label": "Strange Shoes",
+            "rect": {
+                "x": 10.0,
+                "y": 85.56,
+                "width": 15.0,
+                "height": 17.78
+            },
+            "examineText": "Muddy shoes. They look too large for anyone in your family.",
+            "sanityCost": 5,
+            "audioTrigger": "step_squelch"
+        },
+        {
+            "id": "mail_pile",
+            "label": "Mail",
+            "rect": {
+                "x": 60.0,
+                "y": 76.67,
+                "width": 10.0,
+                "height": 8.89
+            },
+            "examineText": "Bills, flyers, and... a letter from Grandmother.",
+            "givesItem": "grandmother_letter"
+        },
+        {
+            "id": "coat_rack",
+            "label": "Coat Rack",
+            "rect": {
+                "x": 15.0,
+                "y": -3.33,
+                "width": 10.0,
+                "height": 35.56
+            },
+            "examineText": "A heavy coat hangs here. A tarnished key slips from the pocket.",
+            "givesItem": "old_key"
+        },
+        {
+            "id": "phone_answer",
+            "label": "Answer Phone",
+            "rect": {
+                "x": 68.0,
+                "y": 53.56,
+                "width": 8.0,
+                "height": 10.67
+            },
+            "examineText": "You lift the receiver. A wet, steady breathing answers. A voice whispers: 'Study drawer. Map.'",
+            "requiredFlag": "restored_power",
+            "lockedText": "Dead line. The house has no power.",
+            "setsFlag": "answered_phone",
+            "audioTrigger": "old_phone_ring",
+            "forbiddenFlags": [
+                "answered_phone",
+                "ignored_phone"
+            ]
+        },
+        {
+            "id": "phone_ignore",
+            "label": "Ignore Phone",
+            "rect": {
+                "x": 78.0,
+                "y": 53.56,
+                "width": 8.0,
+                "height": 10.67
+            },
+            "examineText": "You let it ring until the sound is swallowed by the walls.",
+            "requiredFlag": "restored_power",
+            "lockedText": "Dead line. The house has no power.",
+            "setsFlag": "ignored_phone",
+            "audioTrigger": "old_phone_ring",
+            "sanityCost": 5,
+            "forbiddenFlags": [
+                "answered_phone",
+                "ignored_phone"
+            ]
+        },
+        {
+            "id": "family_photo",
+            "label": "Photo",
+            "rect": {
+                "x": 40.0,
+                "y": 14.44,
+                "width": 10.0,
+                "height": 26.67
+            },
+            "examineText": "A family portrait. Why is your face scratched out?",
+            "examineTextLowSanity": "They are all looking at you. Why are they looking at you?",
+            "sanityCost": 10
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "hallway",
+            "label": "To Hallway",
+            "position": {
+                "x": 80.0,
+                "y": -3.33,
+                "width": 15.0,
+                "height": 106.67
+            },
+            "requiredFlag": "read_letter",
+            "lockedText": "I shouldn't leave until I check the mail."
+        },
+        {
+            "targetSceneId": "outside_porch",
+            "label": "To Porch",
+            "position": {
+                "x": 5.0,
+                "y": 67.78,
+                "width": 12.0,
+                "height": 53.33
+            },
+            "requiredFlag": "found_car_keys",
+            "lockedText": "I need the car keys before I step outside."
+        }
+    ]
 }

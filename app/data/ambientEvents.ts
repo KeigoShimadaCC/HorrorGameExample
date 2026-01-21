@@ -2,6 +2,17 @@ import { HorrorEvent } from '@/app/types';
 
 export const AMBIENT_EVENTS: HorrorEvent[] = [
     {
+        id: "shadow_passes",
+        trigger: "on_timer",
+        timerDuration: 60,
+        audio: "breathing_close",
+        message: "A shadow slips past the doorway. When you look again, it is gone.",
+        requires: { sanityBelow: 65 },
+        blockedByFlag: "sealed_hallway",
+        oneTime: false,
+        cooldown: 90
+    },
+    {
         id: "random_footsteps",
         trigger: "on_timer",
         timerDuration: 45, // seconds

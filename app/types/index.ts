@@ -5,6 +5,7 @@ export interface GameState {
     flags: Record<string, boolean>;
     events?: string[]; // Track triggered horror events
     time: number; // 0-100 representation of night progression
+    resetCount?: number;
 }
 
 export interface Interactable {
@@ -14,10 +15,15 @@ export interface Interactable {
     examineText: string;
     examineTextLowSanity?: string;
     sanityCost?: number;
+    sanityRestore?: number;
+    oneTime?: boolean;
     requiredItem?: string;
     givesItem?: string;
     setsFlag?: string;
     requiredFlag?: string;
+    forbiddenFlag?: string;
+    forbiddenFlags?: string[];
+    lockedText?: string;
     audioTrigger?: string;
     triggerEvent?: string; // ID of event to trigger
     storyFlag?: string; // Flag to set upon interaction
@@ -48,6 +54,7 @@ export interface HorrorEvent {
     // Control
     oneTime: boolean;
     requires?: { storyFlag?: string; item?: string; sanityBelow?: number; };
+    blockedByFlag?: string;
     cooldown?: number; // seconds (for repeatable events)
 }
 

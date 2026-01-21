@@ -3,14 +3,14 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useGameState } from '@/app/hooks/useGameState';
 import { useAudio } from '@/app/hooks/useAudio';
-import { getScene } from '@/app/lib/scenes';
+import { getAllScenes, getScene } from '@/app/lib/scenes';
 import { DialogueBox } from './DialogueBox';
 import { Interactable, HorrorEvent, SceneData } from '@/app/types';
 import { motion } from 'framer-motion';
 import { useAmbientEvents } from '@/app/hooks/useAmbientEvents';
 
 export const GameCanvas = () => {
-    const { currentSceneId, sanity, decreaseSanity, addItem, setFlag, flags, inventory, setScene, events, triggerEvent } = useGameState();
+    const { currentSceneId, sanity, decreaseSanity, addItem, setFlag, flags, inventory, setScene, events, triggerEvent, advanceTime, time, setSanity } = useGameState();
     const { playAmbient, playSfx } = useAudio();
     const [activeDialogue, setActiveDialogue] = useState<string | null>(null);
     const [sceneData, setSceneData] = useState(getScene(currentSceneId));
@@ -21,6 +21,8 @@ export const GameCanvas = () => {
     // Helper to process an event's effects
     const processEvent = useCallback((event: HorrorEvent) => {
         if (event.oneTime && events?.includes(event.id)) return;
+        if (event.trigger === 'on_sanity_threshold' && events?.includes(event.id)) return;
+        if (event.blockedByFlag && flags[event.blockedByFlag]) return;
 
         // Check requirements
         if (event.requires) {
@@ -51,7 +53,7 @@ export const GameCanvas = () => {
                 setFlag(`hidden_${event.hideInteractable}`, true);
             }
 
-            if (event.oneTime) {
+            if (event.trigger === 'on_sanity_threshold' || event.oneTime) {
                 triggerEvent(event.id);
             }
         };
@@ -101,6 +103,19 @@ export const GameCanvas = () => {
 
     }, [currentSceneId, playAmbient, processEvent]);
 
+    useEffect(() => {
+        const scenes = getAllScenes();
+        const sources = new Set<string>();
+        scenes.forEach((scene) => {
+            if (scene.backgroundImage) sources.add(scene.backgroundImage);
+            if (scene.backgroundImageLowSanity) sources.add(scene.backgroundImageLowSanity);
+        });
+        sources.forEach((src) => {
+            const image = new Image();
+            image.src = src;
+        });
+    }, []);
+
     // Monitor Sanity & Flags for passive triggers
     useEffect(() => {
         if (!sceneData?.events) return;
@@ -121,13 +136,29 @@ export const GameCanvas = () => {
 
     }, [sanity, flags, sceneData, processEvent]);
 
+    useEffect(() => {
+        if (time >= 100 && !flags.survived_until_dawn) {
+            setFlag('survived_until_dawn', true);
+        }
+    }, [time, flags.survived_until_dawn, setFlag]);
+
 
     // Handle Interaction
     const handleInteract = (item: Interactable) => {
         if (activeDialogue) return;
 
         // Check requirements
-        if (item.requiredFlag && !flags[item.requiredFlag]) return;
+        if (item.forbiddenFlag && flags[item.forbiddenFlag]) return;
+        if (item.forbiddenFlags && item.forbiddenFlags.some((flag) => flags[flag])) return;
+        if (item.requiredFlag && !flags[item.requiredFlag]) {
+            setActiveDialogue(item.lockedText || "Locked.");
+            return;
+        }
+        if (item.requiredItem && !inventory.includes(item.requiredItem)) {
+            setActiveDialogue(item.lockedText || "You need something to do that.");
+            return;
+        }
+        if (item.oneTime && flags[`used_${item.id}`]) return;
 
         // Resolve Text (String or Object)
         let text = "";
@@ -137,9 +168,18 @@ export const GameCanvas = () => {
             text = item.examineText;
         }
 
-        // Sanity Cost
-        if (item.sanityCost) {
-            decreaseSanity(item.sanityCost);
+        // Sanity adjust (apply once, clamp)
+        if (item.sanityCost || item.sanityRestore) {
+            let nextSanity = sanity;
+            if (item.sanityCost) {
+                nextSanity = Math.max(0, nextSanity - item.sanityCost);
+            }
+            if (item.sanityRestore) {
+                nextSanity = Math.min(100, nextSanity + item.sanityRestore);
+            }
+            if (nextSanity !== sanity) {
+                setSanity(nextSanity);
+            }
         }
 
         // Audio
@@ -148,6 +188,7 @@ export const GameCanvas = () => {
         }
 
         setActiveDialogue(text);
+        advanceTime(5);
 
         // Items/Flags
         if (item.givesItem && !inventory.includes(item.givesItem)) {
@@ -159,6 +200,9 @@ export const GameCanvas = () => {
         if (item.storyFlag) {
             setFlag(item.storyFlag, true);
         }
+        if (item.oneTime) {
+            setFlag(`used_${item.id}`, true);
+        }
 
         // Handle Reveal Logic (for items that reveal others)
         if (item.reveals) {
@@ -169,9 +213,23 @@ export const GameCanvas = () => {
 
         // Trigger Linked Event (support both 'triggerEvent' and legacy/alt 'event')
         const eventId = item.triggerEvent;
+        const triggeredEventIds = new Set<string>();
         if (eventId && sceneData?.events) {
             const event = sceneData.events.find(e => e.id === eventId);
-            if (event) processEvent(event);
+            if (event) {
+                processEvent(event);
+                triggeredEventIds.add(event.id);
+            }
+        }
+
+        if (sceneData?.events) {
+            sceneData.events
+                .filter(e => e.trigger === 'on_examine' && e.targetId === item.id)
+                .forEach(e => {
+                    if (!triggeredEventIds.has(e.id)) {
+                        processEvent(e);
+                    }
+                });
         }
     };
 
@@ -179,9 +237,10 @@ export const GameCanvas = () => {
     const handleNavigation = (nav: SceneData['navigation'][0]) => {
         if (nav.requiredFlag && !flags[nav.requiredFlag]) {
             setActiveDialogue(nav.lockedText || "Locked.");
-            playSfx('/audio/locked.mp3');
+            playSfx('locked');
             return;
         }
+        advanceTime(2);
         setScene(nav.targetSceneId);
     };
 
@@ -200,7 +259,11 @@ export const GameCanvas = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
                 className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
-                style={{ backgroundImage: `url(${bgImage})` }}
+                style={{
+                    backgroundImage: bgImage
+                        ? `url(${bgImage}), radial-gradient(circle at 20% 30%, #1a1a2e 0%, #050505 55%, #020202 100%)`
+                        : "radial-gradient(circle at 20% 30%, #1a1a2e 0%, #050505 55%, #020202 100%)"
+                }}
             >
                 <div className="absolute inset-0 bg-black/20 animate-pulse-slow" />
             </motion.div>
@@ -210,6 +273,9 @@ export const GameCanvas = () => {
                 {sceneData.interactables.map((item) => {
                     // Standard visibility check
                     if (item.requiredFlag && !flags[item.requiredFlag]) return null;
+                    if (item.forbiddenFlag && flags[item.forbiddenFlag]) return null;
+                    if (item.forbiddenFlags?.some((flag) => flags[flag])) return null;
+                    if (item.oneTime && flags[`used_${item.id}`]) return null;
 
                     // Reveal mechanics check: 
                     // If item requires reveal, check if strict 'revealed_ID' flag is set
@@ -248,7 +314,7 @@ export const GameCanvas = () => {
                         }}
                         onClick={() => handleNavigation(nav)}
                     >
-                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/50 text-xs tracking-widest opacity-0 hover:opacity-100 transition-opacity">
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/70 text-xs tracking-widest opacity-60 hover:opacity-100 transition-opacity">
                             {nav.label}
                         </div>
                     </div>

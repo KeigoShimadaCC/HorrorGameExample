@@ -1,22 +1,21 @@
 {
     "id": "grandmothers_room",
     "name": "Grandmother's Room",
-    "backgroundImage": "/images/scenes/grandmothers_room.jpg",
-    "ambientAudio": "/audio/ambient/room_silence_breathing.mp3",
+    "backgroundImage": "/images/scenes/grandmothers_room.png",
+    "backgroundImageLowSanity": "/images/scenes/grandmothers_room.png",
+    "ambientAudio": "room_silence_breathing",
     "interactables": [
         {
             "id": "butsudan",
             "label": "Buddhist Altar",
             "rect": {
-                "x": 60,
-                "y": 40,
-                "width": 20,
-                "height": 35
+                "x": 60.0,
+                "y": 32.22,
+                "width": 20.0,
+                "height": 62.22
             },
-            "examineText": {
-                "default": "Incense ash, cold and gray. The photographs inside show faces you don't recognize. One frame is turned backward.",
-                "lowSanity": "The incense is burning. You didn't light it. The faces in the photographs are watching. One frame is turned backward. You remember turning it forward earlier."
-            },
+            "examineText": "Incense ash, cold and gray. The photographs inside show faces you don't recognize. One frame is turned backward.",
+            "examineTextLowSanity": "The incense is burning. You didn't light it. The faces in the photographs are watching. One frame is turned backward. You remember turning it forward earlier.",
             "sanityCost": 8,
             "reveals": [
                 "turned_photo"
@@ -27,15 +26,13 @@
             "label": "Turned Photo",
             "requiresReveal": true,
             "rect": {
-                "x": 65,
-                "y": 45,
-                "width": 8,
-                "height": 10
+                "x": 65.0,
+                "y": 41.11,
+                "width": 8.0,
+                "height": 17.78
             },
-            "examineText": {
-                "default": "You turn it over. Your grandmother, young, standing before a coastal shrine. Behind her, in the dark water, something surfaces. The photo is dated 1967.",
-                "lowSanity": "You turn it over. Your grandmother stares directly at you. She mouths something. Behind her, IT rises from the water, and you understand now that it has always been rising."
-            },
+            "examineText": "You turn it over. Your grandmother, young, standing before a coastal shrine. Behind her, in the dark water, something surfaces. The photo is dated 1967.",
+            "examineTextLowSanity": "You turn it over. Your grandmother stares directly at you. She mouths something. Behind her, IT rises from the water, and you understand now that it has always been rising.",
             "sanityCost": 15,
             "storyFlag": "seen_entity_origin"
         },
@@ -43,15 +40,13 @@
             "id": "diary",
             "label": "Diary",
             "rect": {
-                "x": 25,
-                "y": 70,
-                "width": 15,
-                "height": 10
+                "x": 25.0,
+                "y": 85.56,
+                "width": 15.0,
+                "height": 17.78
             },
-            "examineText": {
-                "default": "Grandmother's diary. Most pages are filled with mundane entries. But the last month... the handwriting changes. Becomes frantic. 'It followed me back. The old pact. The dreams are not dreams.'",
-                "lowSanity": "The diary entries are addressed to you by name. They describe tonight. They describe what you're doing right now. The final entry: 'Don't look in the study. Don't look don't look don't look don't look'"
-            },
+            "examineText": "Grandmother's diary. Most pages are filled with mundane entries. But the last month... the handwriting changes. Becomes frantic. 'It followed me back. The old pact. The dreams are not dreams.'",
+            "examineTextLowSanity": "The diary entries are addressed to you by name. They describe tonight. They describe what you're doing right now. The final entry: 'Don't look in the study. Don't look don't look don't look don't look'",
             "sanityCost": 12,
             "storyFlag": "read_diary"
         },
@@ -59,15 +54,13 @@
             "id": "futon",
             "label": "Futon",
             "rect": {
-                "x": 40,
-                "y": 75,
-                "width": 25,
-                "height": 15
+                "x": 40.0,
+                "y": 94.44,
+                "width": 25.0,
+                "height": 26.67
             },
-            "examineText": {
-                "default": "The futon is neatly rolled, but there's an impression in the tatami. As if someone is still lying there.",
-                "lowSanity": "The futon is neatly rolled. The impression in the tatami rises and falls. Breathing."
-            },
+            "examineText": "The futon is neatly rolled, but there's an impression in the tatami. As if someone is still lying there.",
+            "examineTextLowSanity": "The futon is neatly rolled. The impression in the tatami rises and falls. Breathing.",
             "sanityCost": 5,
             "triggerEvent": "futon_breath_sound"
         }
@@ -77,10 +70,10 @@
             "targetSceneId": "hallway",
             "label": "Back to Hallway",
             "position": {
-                "x": 40,
-                "y": 90,
-                "width": 20,
-                "height": 10
+                "x": 40.0,
+                "y": 121.11,
+                "width": 20.0,
+                "height": 17.78
             }
         }
     ],
@@ -89,7 +82,7 @@
             "id": "futon_breath_sound",
             "trigger": "on_examine",
             "targetId": "futon",
-            "audio": "/audio/sfx/breathing_close.mp3",
+            "audio": "breathing_close",
             "delay": 2000,
             "oneTime": true
         }

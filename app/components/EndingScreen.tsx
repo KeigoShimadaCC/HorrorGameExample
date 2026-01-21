@@ -19,12 +19,18 @@ export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
 
     const getEndingText = (id: string) => {
         switch (id) {
+            case 'ritual_bargain':
+                return "You complete the ritual. The house accepts the offering and loosens its grip. You are spared, but the debt remains.";
+            case 'escape_true':
+                return "You follow the map through the dunes and reach the sea shrine before dawn. The house fades behind you, quiet at last.";
             case 'cosmic_truth':
-                return "You understand everything. The entity is not evil—it simply IS. Your grandmother made a pact to save the village from a tsunami in 1967. Every 60 years, someone must return to the sea. You walk into the ocean willingly. The cycle continues.";
+                return "You understand everything. The entity is not evil窶琶t simply IS. Your grandmother made a pact to save the village from a tsunami in 1967. Every 60 years, someone must return to the sea. You walk into the ocean willingly. The cycle continues.";
             case 'consumed':
                 return "Sanity hits 0. You become part of the house. You're looking at the entry hall from inside a photograph.";
             case 'escape_broken':
                 return "Months later, you still hear dripping water. You still see her in mirrors. You still dream of rising tides. And sometimes, when it rains, you find yourself walking toward the sea.";
+            case 'sealed_in':
+                return "The salt line holds, but so do the walls. The house keeps what it has claimed, and the night never ends.";
             case 'escape_clean':
                 return "You survive the night with sanity mostly intact. The house burns behind you. But the ocean remains. And in 60 years...";
             default:

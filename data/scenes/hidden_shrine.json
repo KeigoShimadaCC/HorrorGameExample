@@ -1,0 +1,47 @@
+{
+    "id": "hidden_shrine",
+    "name": "Hidden Shrine",
+    "backgroundImage": "/images/scenes/hidden_shrine.png",
+    "backgroundImageLowSanity": "/images/scenes/hidden_shrine.png",
+    "ambientAudio": "dripping_water",
+    "interactables": [
+        {
+            "id": "altar",
+            "label": "Stone Altar",
+            "rect": {
+                "x": 35.0,
+                "y": 32.22,
+                "width": 30.0,
+                "height": 53.33
+            },
+            "examineText": "The altar is damp. The carvings match the map.",
+            "requiredItem": "ritual_talisman",
+            "lockedText": "You feel unworthy without the talisman.",
+            "setsFlag": "performed_ritual",
+            "storyFlag": "performed_ritual",
+            "sanityCost": 15
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "outside_porch",
+            "label": "Back to the House",
+            "position": {
+                "x": 10.0,
+                "y": 85.56,
+                "width": 15.0,
+                "height": 35.56
+            }
+        }
+    ],
+    "events": [
+        {
+            "id": "ritual_complete",
+            "trigger": "on_storyFlag",
+            "flag": "performed_ritual",
+            "audio": "whisper_name",
+            "message": "The shrine answers. The air tastes like salt and iron.",
+            "oneTime": true
+        }
+    ]
+}

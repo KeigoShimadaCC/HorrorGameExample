@@ -11,10 +11,13 @@ import { checkEndingConditions } from "./lib/endings";
 import { useGameState } from "./hooks/useGameState";
 import { useEffect, useState } from "react";
 import { Ending } from "./lib/endings";
+import { AudioControls } from "./components/AudioControls";
+import { TitleScreen } from "./components/TitleScreen";
 
 export default function Home() {
   const gameState = useGameState();
   const [activeEnding, setActiveEnding] = useState<Ending | null>(null);
+  const [hasStarted, setHasStarted] = useState(false);
 
   // Check ending conditions on state change
   useEffect(() => {
@@ -26,12 +29,15 @@ export default function Home() {
 
   return (
     <main className="relative w-screen h-screen overflow-hidden bg-abyss-black text-foreground">
-      {activeEnding ? (
+      {!hasStarted ? (
+        <TitleScreen onStart={() => setHasStarted(true)} />
+      ) : activeEnding ? (
         <EndingScreen
           ending={activeEnding}
           onReset={() => {
             gameState.resetGame();
             setActiveEnding(null);
+            setHasStarted(false);
           }}
         />
       ) : (
@@ -45,6 +51,7 @@ export default function Home() {
 
           <SanityMeter />
           <Inventory />
+          <AudioControls />
         </>
       )}
 

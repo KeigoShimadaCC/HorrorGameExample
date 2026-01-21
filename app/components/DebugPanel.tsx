@@ -70,7 +70,7 @@ export const DebugPanel = () => {
             <div className="mb-4">
                 <h4 className="font-bold text-white mb-2">NAVIGATION</h4>
                 <div className="flex flex-wrap gap-2">
-                    {['entry_hall', 'hallway', 'kitchen', 'living_room', 'grandmothers_room', 'bathroom', 'study'].map(id => (
+                    {['entry_hall', 'hallway', 'kitchen', 'living_room', 'grandmothers_room', 'bathroom', 'study', 'utility_room', 'storage_closet', 'outside_porch', 'hidden_shrine'].map(id => (
                         <button
                             key={id}
                             onClick={() => setScene(id)}

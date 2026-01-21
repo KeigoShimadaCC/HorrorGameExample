@@ -1,0 +1,59 @@
+{
+    "id": "outside_porch",
+    "name": "Outside Porch",
+    "backgroundImage": "/images/scenes/outside_porch.png",
+    "backgroundImageLowSanity": "/images/scenes/outside_porch.png",
+    "ambientAudio": "entry_rain",
+    "interactables": [
+        {
+            "id": "car",
+            "label": "Car",
+            "rect": {
+                "x": 60.0,
+                "y": 50.0,
+                "width": 25.0,
+                "height": 53.33
+            },
+            "examineText": "The car is soaked. The door handle is cold and slick.",
+            "requiredItem": "car_keys",
+            "requiredFlag": "found_shrine_map",
+            "lockedText": "You cannot leave without the map. You will get lost in the dunes.",
+            "setsFlag": "got_outside"
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "entry_hall",
+            "label": "Back Inside",
+            "position": {
+                "x": 10.0,
+                "y": 85.56,
+                "width": 15.0,
+                "height": 35.56
+            }
+        },
+        {
+            "targetSceneId": "hidden_shrine",
+            "label": "Toward the Shrine",
+            "position": {
+                "x": 80.0,
+                "y": -3.33,
+                "width": 15.0,
+                "height": 44.44
+            },
+            "requiredFlag": "found_shrine_map",
+            "lockedText": "You cannot find the shrine without the map."
+        }
+    ],
+    "events": [
+        {
+            "id": "porch_pull",
+            "trigger": "on_enter",
+            "audio": "footsteps_above",
+            "screenEffect": "shake",
+            "message": "Cold fingers brush your spine. The house does not want you to leave.",
+            "blockedByFlag": "found_shrine_map",
+            "oneTime": false
+        }
+    ]
+}

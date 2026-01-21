@@ -3,43 +3,135 @@
     "name": "Hallway",
     "backgroundImage": "/images/scenes/hallway.png",
     "backgroundImageLowSanity": "/images/scenes/hallway_distorted.png",
-    "ambientAudio": "/audio/creaking_wood.mp3",
+    "ambientAudio": "creaking_wood",
     "interactables": [
         {
             "id": "fusuma_left",
             "label": "Fusuma",
             "rect": {
-                "x": 10,
-                "y": 20,
-                "width": 20,
-                "height": 60
+                "x": 10.0,
+                "y": -3.33,
+                "width": 20.0,
+                "height": 106.67
             },
-            "examineText": "Locked. You hear breathing on the other side.",
-            "sanityCost": 5
+            "examineText": "The paper door is stiff with age. It slides open with a dry sigh.",
+            "examineTextLowSanity": "The paper door is wet. Something scratches from the other side.",
+            "sanityCost": 5,
+            "requiredItem": "old_key",
+            "lockedText": "The door is sealed with a small iron lock.",
+            "setsFlag": "opened_fusuma"
         },
         {
             "id": "dark_corner",
             "label": "Shadow",
             "rect": {
-                "x": 45,
-                "y": 40,
-                "width": 10,
-                "height": 20
+                "x": 45.0,
+                "y": 32.22,
+                "width": 10.0,
+                "height": 35.56
             },
             "examineText": "Nothing there. Just shadows.",
             "examineTextLowSanity": "It moved. I saw it move.",
             "sanityCost": 8
+        },
+        {
+            "id": "salt_line",
+            "label": "Salt Line",
+            "rect": {
+                "x": 35.0,
+                "y": 94.44,
+                "width": 20.0,
+                "height": 14.22
+            },
+            "examineText": "You pour salt into the groove. The house seems to recoil.",
+            "requiredItem": "salt_pouch",
+            "lockedText": "You have nothing to pour here.",
+            "setsFlag": "sealed_hallway",
+            "requiredFlag": "found_salt_pouch",
+            "oneTime": true
         }
     ],
     "navigation": [
         {
+            "targetSceneId": "utility_room",
+            "label": "To Utility Room",
+            "position": {
+                "x": 60.0,
+                "y": 76.67,
+                "width": 12.0,
+                "height": 35.56
+            }
+        },
+        {
+            "targetSceneId": "storage_closet",
+            "label": "To Storage Closet",
+            "position": {
+                "x": 8.0,
+                "y": 14.44,
+                "width": 10.0,
+                "height": 35.56
+            },
+            "requiredFlag": "opened_fusuma",
+            "lockedText": "The fusuma is still locked."
+        },
+        {
+            "targetSceneId": "kitchen",
+            "label": "To Kitchen",
+            "position": {
+                "x": 5.0,
+                "y": 76.67,
+                "width": 12.0,
+                "height": 35.56
+            }
+        },
+        {
+            "targetSceneId": "living_room",
+            "label": "To Living Room",
+            "position": {
+                "x": 25.0,
+                "y": 76.67,
+                "width": 12.0,
+                "height": 35.56
+            }
+        },
+        {
+            "targetSceneId": "grandmothers_room",
+            "label": "To Grandmother's Room",
+            "position": {
+                "x": 45.0,
+                "y": -21.11,
+                "width": 15.0,
+                "height": 44.44
+            }
+        },
+        {
+            "targetSceneId": "bathroom",
+            "label": "To Bathroom",
+            "position": {
+                "x": 65.0,
+                "y": -21.11,
+                "width": 12.0,
+                "height": 44.44
+            }
+        },
+        {
+            "targetSceneId": "study",
+            "label": "To Study",
+            "position": {
+                "x": 80.0,
+                "y": 76.67,
+                "width": 12.0,
+                "height": 35.56
+            }
+        },
+        {
             "targetSceneId": "entry_hall",
             "label": "Back to Entry",
             "position": {
-                "x": 40,
-                "y": 85,
-                "width": 20,
-                "height": 15
+                "x": 40.0,
+                "y": 112.22,
+                "width": 20.0,
+                "height": 26.67
             }
         }
     ]

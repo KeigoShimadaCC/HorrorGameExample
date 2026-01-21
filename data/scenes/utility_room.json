@@ -1,0 +1,60 @@
+{
+    "id": "utility_room",
+    "name": "Utility Room",
+    "backgroundImage": "/images/scenes/utility_room.png",
+    "backgroundImageLowSanity": "/images/scenes/utility_room.png",
+    "ambientAudio": "room_silence_breathing",
+    "interactables": [
+        {
+            "id": "breaker_panel",
+            "label": "Breaker Panel",
+            "rect": {
+                "x": 35.0,
+                "y": -3.33,
+                "width": 30.0,
+                "height": 80.0
+            },
+            "examineText": "The panel is rusted shut. A thin gap runs along the seam.",
+            "examineTextLowSanity": "The panel throbs like a heartbeat. It wants to be opened.",
+            "requiredItem": "rusty_knife",
+            "lockedText": "The panel won't budge with bare hands.",
+            "setsFlag": "restored_power",
+            "storyFlag": "restored_power"
+        },
+        {
+            "id": "toolbox",
+            "label": "Toolbox",
+            "rect": {
+                "x": 10.0,
+                "y": 85.56,
+                "width": 20.0,
+                "height": 26.67
+            },
+            "examineText": "A cracked toolbox. Inside is a working flashlight.",
+            "givesItem": "flashlight"
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "hallway",
+            "label": "Back to Hallway",
+            "position": {
+                "x": 70.0,
+                "y": 103.33,
+                "width": 20.0,
+                "height": 26.67
+            }
+        }
+    ],
+    "events": [
+        {
+            "id": "power_surge",
+            "trigger": "on_storyFlag",
+            "flag": "restored_power",
+            "audio": "tv_static",
+            "screenEffect": "flicker_heavy",
+            "message": "The lights stutter on, then dim. The house exhales.",
+            "oneTime": true
+        }
+    ]
+}

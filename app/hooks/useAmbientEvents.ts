@@ -6,7 +6,10 @@ import { HorrorEvent } from '@/app/types';
 export const useAmbientEvents = (
     onTriggerEvent: (event: HorrorEvent) => void
 ) => {
-    const { sanity } = useGameState();
+    const { sanity, flags, resetCount } = useGameState();
+    const sanityRef = useRef(sanity);
+    const flagsRef = useRef(flags);
+    const timersRef = useRef<NodeJS.Timeout[]>([]);
 
     // Track last triggered times for cooldowns
     const lastTriggeredRef = useRef<Record<string, number>>({});
@@ -26,47 +29,65 @@ export const useAmbientEvents = (
         onTriggerEvent(event);
     }, [onTriggerEvent]);
 
-    // Check Timer/Random Events
     useEffect(() => {
-        const interval = setInterval(() => {
-            const now = Date.now();
+        sanityRef.current = sanity;
+    }, [sanity]);
 
-            AMBIENT_EVENTS.forEach(event => {
-                if (event.trigger !== 'on_timer') return;
+    useEffect(() => {
+        flagsRef.current = flags;
+    }, [flags]);
 
-                // One time check
+    useEffect(() => {
+        triggeredSessionEventsRef.current.clear();
+        lastTriggeredRef.current = {};
+    }, [resetCount]);
+
+    // Timer-based ambient events (per-event cadence)
+    useEffect(() => {
+        timersRef.current.forEach(clearInterval);
+        timersRef.current = [];
+
+        AMBIENT_EVENTS.forEach((event) => {
+            if (event.trigger !== 'on_timer') return;
+            const intervalMs = (event.timerDuration || 60) * 1000;
+            const timer = setInterval(() => {
+                const now = Date.now();
+                const currentSanity = sanityRef.current;
+                const currentFlags = flagsRef.current;
+
+                if (event.blockedByFlag && currentFlags[event.blockedByFlag]) return;
                 if (event.oneTime && triggeredSessionEventsRef.current.has(event.id)) return;
+                if (event.requires?.sanityBelow && currentSanity >= event.requires.sanityBelow) return;
 
-                // Sanity Requirement
-                if (event.requires?.sanityBelow && sanity >= event.requires.sanityBelow) return;
-
-                // Cooldown Check
                 if (event.cooldown) {
                     const last = lastTriggeredRef.current[event.id] || 0;
                     if (now - last < event.cooldown * 1000) return;
                 }
 
-                // Random Chance (to avoid machine-like precision)
-                if (Math.random() > 0.3) return; // 70% chance to SKIP per tick if conditions met, making it feel organic
+                if (Math.random() > 0.3) return;
 
-                // Trigger
                 fireEvent(event);
+            }, intervalMs);
 
-            });
-        }, 5000); // Check every 5 seconds
+            timersRef.current.push(timer);
+        });
 
-        return () => clearInterval(interval);
-    }, [sanity, fireEvent]);
+        return () => {
+            timersRef.current.forEach(clearInterval);
+            timersRef.current = [];
+        };
+    }, [fireEvent]);
 
     // Check Sanity Threshold Events
     useEffect(() => {
         AMBIENT_EVENTS.forEach(event => {
             if (event.trigger !== 'on_sanity_threshold') return;
+            if (event.blockedByFlag && flags[event.blockedByFlag]) return;
             if (event.oneTime && triggeredSessionEventsRef.current.has(event.id)) return;
 
             if (event.sanityThreshold && sanity <= event.sanityThreshold) {
                 fireEvent(event);
             }
         });
-    }, [sanity, fireEvent]);
+    }, [sanity, flags, fireEvent]);
 };

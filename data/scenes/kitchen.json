@@ -2,17 +2,17 @@
     "id": "kitchen",
     "name": "Kitchen",
     "backgroundImage": "/images/scenes/kitchen.png",
-    "backgroundImageLowSanity": "/images/scenes/kitchen_distorted.png",
-    "ambientAudio": "/audio/dripping_water.mp3",
+    "backgroundImageLowSanity": "/images/scenes/kitchen.png",
+    "ambientAudio": "dripping_water",
     "interactables": [
         {
             "id": "fridge",
             "label": "Refrigerator",
             "rect": {
-                "x": 15,
-                "y": 25,
-                "width": 20,
-                "height": 55
+                "x": 20.0,
+                "y": 37.56,
+                "width": 22.0,
+                "height": 67.56
             },
             "examineText": "It smells like something died in there. The hum is deafening.",
             "examineTextLowSanity": "I can hear it breathing. Don't open it.",
@@ -22,10 +22,10 @@
             "id": "dirty_dishes",
             "label": "Sink",
             "rect": {
-                "x": 45,
-                "y": 45,
-                "width": 15,
-                "height": 10
+                "x": 43.0,
+                "y": 58.89,
+                "width": 32.0,
+                "height": 32.0
             },
             "examineText": "Piles of rotting food. Analyzing the decay... maybe weeks old?",
             "sanityCost": 3
@@ -34,18 +34,13 @@
             "id": "table_knife",
             "label": "Rusty Knife",
             "rect": {
-                "x": 70,
-                "y": 55,
-                "width": 10,
-                "height": 5
+                "x": 67.0,
+                "y": 76.67,
+                "width": 31.0,
+                "height": 53.33
             },
             "examineText": "Old and jagged. Dangerous.",
-            "collectible": {
-                "itemId": "rusty_knife",
-                "name": "Rusty Knife",
-                "description": "A serrated knife covered in... rust? Or dried blood.",
-                "content": "It feels heavy in your hand."
-            },
+            "givesItem": "rusty_knife",
             "sanityCost": 2
         }
     ],
@@ -54,10 +49,10 @@
             "targetSceneId": "hallway",
             "label": "Back to Hallway",
             "position": {
-                "x": 40,
-                "y": 85,
-                "width": 20,
-                "height": 15
+                "x": 40.0,
+                "y": 112.22,
+                "width": 20.0,
+                "height": 26.67
             }
         }
     ]

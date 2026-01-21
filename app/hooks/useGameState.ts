@@ -19,6 +19,7 @@ const INITIAL_STATE: GameState = {
     flags: {},
     events: [], // New: Track triggered events
     time: 0,
+    resetCount: 0,
 };
 
 export const useGameState = create<GameStore>((set) => ({
@@ -48,5 +49,8 @@ export const useGameState = create<GameStore>((set) => ({
         time: Math.min(100, state.time + amount)
     })),
 
-    resetGame: () => set(INITIAL_STATE),
+    resetGame: () => set((state) => ({
+        ...INITIAL_STATE,
+        resetCount: (state.resetCount || 0) + 1,
+    })),
 }));

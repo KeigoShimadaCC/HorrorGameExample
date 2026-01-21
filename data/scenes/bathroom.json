@@ -1,38 +1,48 @@
 {
     "id": "bathroom",
     "name": "Bathroom",
-    "backgroundImage": "/images/scenes/bathroom.jpg",
-    "ambientAudio": "/audio/ambient/dripping_water.mp3",
+    "backgroundImage": "/images/scenes/bathroom.png",
+    "backgroundImageLowSanity": "/images/scenes/bathroom_distorted.png",
+    "ambientAudio": "dripping_water",
     "interactables": [
         {
             "id": "mirror",
             "label": "Mirror",
             "rect": {
-                "x": 40,
-                "y": 25,
-                "width": 20,
-                "height": 35
+                "x": 40.0,
+                "y": 5.56,
+                "width": 20.0,
+                "height": 62.22
             },
-            "examineText": {
-                "default": "You wipe the fog. Your reflection stares back. It blinks a moment after you do.",
-                "lowSanity": "You wipe the fog. Your reflection doesn't move. It smiles. You're not smiling."
-            },
+            "examineText": "You wipe the fog. Your reflection stares back. It blinks a moment after you do.",
+            "examineTextLowSanity": "You wipe the fog. Your reflection doesn't move. It smiles. You're not smiling.",
             "sanityCost": 12,
             "triggerEvent": "mirror_scare"
+        },
+        {
+            "id": "medicine_cabinet",
+            "label": "Medicine Cabinet",
+            "rect": {
+                "x": 20.0,
+                "y": -3.33,
+                "width": 12.0,
+                "height": 21.33
+            },
+            "examineText": "Old ointments and salt packets. You swallow one without thinking.",
+            "sanityRestore": 10,
+            "oneTime": true
         },
         {
             "id": "bathtub",
             "label": "Bathtub",
             "rect": {
-                "x": 60,
-                "y": 50,
-                "width": 30,
-                "height": 30
+                "x": 60.0,
+                "y": 50.0,
+                "width": 30.0,
+                "height": 53.33
             },
-            "examineText": {
-                "default": "Empty. A dark stain rings the bottom. Hair clogs the drain—too much hair.",
-                "lowSanity": "Water. There's water now. Something is under the surface. Long hair spreads like ink. A hand reaches up—"
-            },
+            "examineText": "Empty. A dark stain rings the bottom. Hair clogs the drain遯ｶ譚ｯoo much hair.",
+            "examineTextLowSanity": "Water. There's water now. Something is under the surface. Long hair spreads like ink. A hand reaches up遯ｶ繝ｻ",
             "sanityCost": 18,
             "triggerEvent": "bathtub_hand",
             "requiredFlag": "seen_entity_origin"
@@ -43,10 +53,10 @@
             "targetSceneId": "hallway",
             "label": "Back to Hallway",
             "position": {
-                "x": 10,
-                "y": 50,
-                "width": 10,
-                "height": 40
+                "x": 10.0,
+                "y": 50.0,
+                "width": 10.0,
+                "height": 71.11
             }
         }
     ],
@@ -54,14 +64,14 @@
         {
             "id": "mirror_scare",
             "trigger": "on_examine",
-            "audio": "/audio/sfx/tap.mp3",
+            "audio": "mirror_tap",
             "delay": 1500,
             "oneTime": true
         },
         {
             "id": "bathtub_hand",
             "trigger": "on_examine",
-            "audio": "/audio/sfx/splash_scream.mp3",
+            "audio": "water_splash_scream",
             "screenEffect": "flash_black",
             "sanityCost": 20,
             "teleportTo": "hallway",
