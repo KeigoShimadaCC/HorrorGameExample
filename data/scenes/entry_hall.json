@@ -100,10 +100,10 @@
             "targetSceneId": "hallway",
             "label": "To Hallway",
             "position": {
-                "x": 80.0,
-                "y": -3.33,
-                "width": 15.0,
-                "height": 106.67
+                "x": 88.0,
+                "y": 0.0,
+                "width": 10.0,
+                "height": 40.0
             },
             "requiredFlag": "read_letter",
             "lockedText": "I shouldn't leave until I check the mail."
@@ -112,10 +112,10 @@
             "targetSceneId": "outside_porch",
             "label": "To Porch",
             "position": {
-                "x": 5.0,
-                "y": 67.78,
-                "width": 12.0,
-                "height": 53.33
+                "x": 2.0,
+                "y": 60.0,
+                "width": 10.0,
+                "height": 20.0
             },
             "requiredFlag": "found_car_keys",
             "lockedText": "I need the car keys before I step outside."

@@ -11,9 +11,15 @@ interface EndingScreenProps {
 
 export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
     const [showText, setShowText] = useState(false);
+    const [showHint, setShowHint] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => setShowText(true), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setShowHint(true), 4500);
         return () => clearTimeout(timer);
     }, []);
 
@@ -54,6 +60,27 @@ export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
         }
     };
 
+    const getHintText = (id: string) => {
+        switch (id) {
+            case 'consumed':
+                return "Hint: Some rooms hide items that protect your sanity. Search the bathroom cabinet and avoid the forbidden book.";
+            case 'cosmic_truth':
+                return "Hint: To uncover the truth, connect the diary, the study letter, and the strange book.";
+            case 'escape_broken':
+                return "Hint: You can escape, but knowledge changes you. Try leaving without reading the strange book.";
+            case 'escape_clean':
+                return "Hint: Hold onto your sanity and endure the night. Time advances as you explore.";
+            case 'escape_true':
+                return "Hint: Keys and a map are required before the car will get you out.";
+            case 'sealed_in':
+                return "Hint: The hallway can be sealed. Find salt and use the line in the hall.";
+            case 'ritual_bargain':
+                return "Hint: A talisman and a shrine are both needed. Look for a locked storage path.";
+            default:
+                return "Hint: Explore every room and revisit places after major discoveries.";
+        }
+    };
+
     return (
         <div className="fixed inset-0 z-[200] bg-black text-white flex flex-col items-center justify-center p-10 select-none">
             <motion.h1
@@ -83,6 +110,15 @@ export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
             >
                 Play Again
             </motion.button>
+
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: showHint ? 1 : 0, y: showHint ? 0 : 10 }}
+                transition={{ duration: 1 }}
+                className="mt-8 max-w-xl text-center text-xs text-faded/80 font-serif border border-white/10 bg-abyss-dark/70 px-6 py-4"
+            >
+                {getHintText(ending.id)}
+            </motion.div>
         </div>
     );
 };

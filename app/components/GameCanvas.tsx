@@ -251,6 +251,8 @@ export const GameCanvas = () => {
 
     if (!sceneData) return <div className="text-faded text-center mt-20">Loading...</div>;
 
+    const isLowSanity = sanity < 40;
+
     return (
         <div className="relative w-full h-full bg-abyss-black overflow-hidden select-none">
             {/* Background Layer */}
@@ -287,7 +289,10 @@ export const GameCanvas = () => {
                     return (
                         <div
                             key={item.id}
-                            className="absolute cursor-help hover:bg-white/5 transition-colors duration-300 rounded-full"
+                            className={[
+                                "absolute cursor-help transition-colors duration-300 rounded-full",
+                                isLowSanity ? "bg-blood-dark/30 hover:bg-blood-dark/50" : "bg-gray-800/20 hover:bg-gray-700/30"
+                            ].join(" ")}
                             style={{
                                 left: `${item.rect.x}%`,
                                 top: `${item.rect.y}%`,
@@ -305,7 +310,12 @@ export const GameCanvas = () => {
                 {sceneData.navigation.map((nav) => (
                     <div
                         key={nav.targetSceneId}
-                        className="group absolute pointer-events-auto cursor-pointer hover:bg-blue-500/10 transition-colors duration-300 border border-transparent hover:border-blue-500/30"
+                        className={[
+                            "group absolute pointer-events-auto cursor-pointer transition-colors duration-300 border border-transparent",
+                            isLowSanity
+                                ? "bg-blood-dark/25 hover:bg-blood-dark/40 hover:border-blood-dark/50"
+                                : "bg-gray-800/15 hover:bg-blue-500/10 hover:border-blue-500/30"
+                        ].join(" ")}
                         style={{
                             left: `${nav.position.x}%`,
                             top: `${nav.position.y}%`,

@@ -11,8 +11,8 @@
             "rect": {
                 "x": 60.0,
                 "y": 32.22,
-                "width": 20.0,
-                "height": 62.22
+                "width": 10.0,
+                "height": 50.0
             },
             "examineText": "Incense ash, cold and gray. The photographs inside show faces you don't recognize. One frame is turned backward.",
             "examineTextLowSanity": "The incense is burning. You didn't light it. The faces in the photographs are watching. One frame is turned backward. You remember turning it forward earlier.",
@@ -26,7 +26,7 @@
             "label": "Turned Photo",
             "requiresReveal": true,
             "rect": {
-                "x": 65.0,
+                "x": 72.0,
                 "y": 41.11,
                 "width": 8.0,
                 "height": 17.78
@@ -71,9 +71,9 @@
             "label": "Back to Hallway",
             "position": {
                 "x": 40.0,
-                "y": 82.0,
+                "y": 70.0,
                 "width": 20.0,
-                "height": 18.0
+                "height": 12.0
             }
         }
     ],
