@@ -52,6 +52,9 @@ export const GameCanvas = () => {
             if (event.hideInteractable) {
                 setFlag(`hidden_${event.hideInteractable}`, true);
             }
+            if (event.setsFlag) {
+                setFlag(event.setsFlag, true);
+            }
 
             if (event.trigger === 'on_sanity_threshold' || event.oneTime) {
                 triggerEvent(event.id);

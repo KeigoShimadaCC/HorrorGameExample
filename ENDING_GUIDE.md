@@ -42,3 +42,7 @@ Use this to test each ending. All steps assume a fresh run unless noted.
 1) Living Room: take car keys.
 2) Keep sanity above 60.
 3) Wait until time reaches 100 by interacting and navigating (time advances per action).
+
+## Onryo's Grasp (killed_by_onryo)
+1) Enter the Storage Closet.
+2) Stay inside for ~22 seconds without leaving.

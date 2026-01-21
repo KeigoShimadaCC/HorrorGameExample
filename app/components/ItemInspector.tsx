@@ -40,6 +40,16 @@ export const ItemInspector = ({ item, onClose }: ItemInspectorProps) => {
                         </h2>
                         <div className={`h-px w-full mb-4 ${isLowSanity ? "bg-blood-dark/60" : "bg-gray-700"}`} />
 
+                        {item.image && (
+                            <div className="mb-4 flex justify-center">
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="h-20 w-20 object-contain opacity-90"
+                                />
+                            </div>
+                        )}
+
                         <p className={`italic mb-6 ${isLowSanity ? "text-red-200/70" : "text-gray-400"}`}>
                             {item.description}
                         </p>

@@ -14,6 +14,14 @@ export interface Ending {
 
 export const ENDINGS: Ending[] = [
     {
+        id: "onryo_grasp",
+        name: "Onryo's Grasp",
+        conditions: {
+            requiredFlags: ["killed_by_onryo"]
+        },
+        priority: 130,
+    },
+    {
         id: "ritual_bargain",
         name: "Ritual Bargain",
         conditions: {

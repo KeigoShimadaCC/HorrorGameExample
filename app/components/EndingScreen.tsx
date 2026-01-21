@@ -41,6 +41,8 @@ export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
 
     const getEndingText = (id: string) => {
         switch (id) {
+            case 'onryo_grasp':
+                return "You linger in the closet. The air turns cold. A vengeful spirit stands inches from your face. There is no time to scream.";
             case 'ritual_bargain':
                 return "You complete the ritual. The house accepts the offering and loosens its grip. You are spared, but the debt remains.";
             case 'escape_true':
@@ -62,6 +64,8 @@ export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
 
     const getHintText = (id: string) => {
         switch (id) {
+            case 'onryo_grasp':
+                return "Hint: The closet does not like guests. Leave quickly, or seek the spirit's origin first.";
             case 'consumed':
                 return "Hint: Some rooms hide items that protect your sanity. Search the bathroom cabinet and avoid the forbidden book.";
             case 'cosmic_truth':

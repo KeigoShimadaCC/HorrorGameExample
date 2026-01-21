@@ -50,6 +50,7 @@ export interface HorrorEvent {
     teleportTo?: string;
     revealInteractable?: string;
     hideInteractable?: string;
+    setsFlag?: string;
 
     // Control
     oneTime: boolean;

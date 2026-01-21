@@ -42,5 +42,17 @@
                 "height": 15.0
             }
         }
+    ],
+    "events": [
+        {
+            "id": "closet_onryo",
+            "trigger": "on_timer",
+            "timerDuration": 22,
+            "audio": "breathing_close",
+            "screenEffect": "flash_black",
+            "message": "A woman in soaked funeral robes fills the doorway. Her hair crawls across the floor toward you.",
+            "setsFlag": "killed_by_onryo",
+            "oneTime": true
+        }
     ]
 }
