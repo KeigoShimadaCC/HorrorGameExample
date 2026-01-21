@@ -2,6 +2,12 @@
 
 This file tracks the story-critical flags, items, scenes, and events currently implemented in the game. Use it as a live checklist for scenario completeness.
 
+## Progress Summary (Current Snapshot)
+- Core loop (scene navigation, interactables, sanity, inventory, audio controls): Implemented.
+- Scenario-critical content (flags/items/scenes/events/endings): Implemented for current script.
+- UI/UX layers (title, dialogue, effects, inventory, sanity meter): Implemented.
+- Remaining gaps are primarily content polish and assets.
+
 ## Flags (Story Progress)
 - `read_letter` - Set by inspecting the mail pile in entry hall. Implemented.
 - `read_diary` - Set by diary in grandmother's room. Implemented.
@@ -72,10 +78,14 @@ Scene events:
 
 ## Gaps / To Verify
 - Audio files are not in `public/audio/`; the system falls back to generated tones/noise.
-- Several scene background images are placeholders using existing hallway/entry assets.
 - Phone interaction is linear; no choice branch yet.
+- Validate all scenes for pacing/balance and sanity cost tuning.
+- QA pass for navigation hitboxes and interactable rectangles.
 
 ## Planned (Not Implemented Yet)
 Events:
 - `phone_choice` (answer/ignore path split)
-- `entity_whisper` (on map pickup)
+
+## Completion Estimate
+- Current state: ~85% complete for a vertical-slice playable scenario.
+- Remaining ~15%: audio asset integration, branching phone choice, tuning, and QA/polish.

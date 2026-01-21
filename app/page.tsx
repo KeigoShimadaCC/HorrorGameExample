@@ -56,7 +56,7 @@ export default function Home() {
       )}
 
       <div className="fixed bottom-2 right-2 text-faded opacity-20 text-[10px] pointer-events-none font-serif">
-        深淵の家
+        The House
       </div>
     </main>
   );

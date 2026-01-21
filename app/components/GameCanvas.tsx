@@ -305,7 +305,7 @@ export const GameCanvas = () => {
                 {sceneData.navigation.map((nav) => (
                     <div
                         key={nav.targetSceneId}
-                        className="absolute pointer-events-auto cursor-pointer hover:bg-blue-500/10 transition-colors duration-300 border border-transparent hover:border-blue-500/30"
+                        className="group absolute pointer-events-auto cursor-pointer hover:bg-blue-500/10 transition-colors duration-300 border border-transparent hover:border-blue-500/30"
                         style={{
                             left: `${nav.position.x}%`,
                             top: `${nav.position.y}%`,
@@ -314,8 +314,10 @@ export const GameCanvas = () => {
                         }}
                         onClick={() => handleNavigation(nav)}
                     >
-                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/70 text-xs tracking-widest opacity-60 hover:opacity-100 transition-opacity">
-                            {nav.label}
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/70 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="font-serif tracking-[0.35em]">
+                                {nav.label}
+                            </span>
                         </div>
                     </div>
                 ))}

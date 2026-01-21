@@ -27,7 +27,7 @@
                 "width": 30.0,
                 "height": 44.44
             },
-            "examineText": "Grandfather's desk. A half-finished letter: 'The covenant cannot be broken. She made the pact in 1967 to save the village. Every 60 years, the sea demands遯ｶ繝ｻ The rest is torn away.",
+            "examineText": "Grandfather's desk. A half-finished letter: 'The covenant cannot be broken. She made the pact in 1967 to save the village. Every 60 years, the sea demands... The rest is torn away.",
             "examineTextLowSanity": "The letter is complete now. It describes the ritual. It describes YOU. It describes what happens at 3:33 AM. You check your phone. It's 3:32.",
             "sanityCost": 15,
             "storyFlag": "learned_covenant",

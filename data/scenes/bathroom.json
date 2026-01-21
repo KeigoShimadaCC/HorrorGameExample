@@ -41,8 +41,8 @@
                 "width": 30.0,
                 "height": 53.33
             },
-            "examineText": "Empty. A dark stain rings the bottom. Hair clogs the drain遯ｶ譚ｯoo much hair.",
-            "examineTextLowSanity": "Water. There's water now. Something is under the surface. Long hair spreads like ink. A hand reaches up遯ｶ繝ｻ",
+            "examineText": "Empty. A dark stain rings the bottom. Hair clogs the drain. Too much hair.",
+            "examineTextLowSanity": "Water. There's water now. Something is under the surface. Long hair spreads like ink. A hand reaches up.",
             "sanityCost": 18,
             "triggerEvent": "bathtub_hand",
             "requiredFlag": "seen_entity_origin"

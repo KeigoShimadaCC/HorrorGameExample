@@ -17,6 +17,22 @@ export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
         return () => clearTimeout(timer);
     }, []);
 
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        try {
+            const key = 'the_house_endings';
+            const raw = window.localStorage.getItem(key);
+            const parsed = raw ? JSON.parse(raw) : [];
+            const ids = Array.isArray(parsed) ? parsed : [];
+            if (!ids.includes(ending.id)) {
+                ids.push(ending.id);
+                window.localStorage.setItem(key, JSON.stringify(ids));
+            }
+        } catch {
+            // Ignore localStorage failures.
+        }
+    }, [ending.id]);
+
     const getEndingText = (id: string) => {
         switch (id) {
             case 'ritual_bargain':
@@ -24,7 +40,7 @@ export const EndingScreen = ({ ending, onReset }: EndingScreenProps) => {
             case 'escape_true':
                 return "You follow the map through the dunes and reach the sea shrine before dawn. The house fades behind you, quiet at last.";
             case 'cosmic_truth':
-                return "You understand everything. The entity is not evil窶琶t simply IS. Your grandmother made a pact to save the village from a tsunami in 1967. Every 60 years, someone must return to the sea. You walk into the ocean willingly. The cycle continues.";
+                return "You understand everything. The entity is not evil - it simply IS. Your grandmother made a pact to save the village from a tsunami in 1967. Every 60 years, someone must return to the sea. You walk into the ocean willingly. The cycle continues.";
             case 'consumed':
                 return "Sanity hits 0. You become part of the house. You're looking at the entry hall from inside a photograph.";
             case 'escape_broken':

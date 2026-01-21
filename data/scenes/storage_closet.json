@@ -37,9 +37,9 @@
             "label": "Back to Hallway",
             "position": {
                 "x": 70.0,
-                "y": 103.33,
+                "y": 82.0,
                 "width": 20.0,
-                "height": 26.67
+                "height": 18.0
             }
         }
     ]
