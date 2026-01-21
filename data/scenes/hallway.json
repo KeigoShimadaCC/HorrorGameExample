@@ -1,0 +1,46 @@
+{
+    "id": "hallway",
+    "name": "Hallway",
+    "backgroundImage": "/images/scenes/hallway.png",
+    "backgroundImageLowSanity": "/images/scenes/hallway_distorted.png",
+    "ambientAudio": "/audio/creaking_wood.mp3",
+    "interactables": [
+        {
+            "id": "fusuma_left",
+            "label": "Fusuma",
+            "rect": {
+                "x": 10,
+                "y": 20,
+                "width": 20,
+                "height": 60
+            },
+            "examineText": "Locked. You hear breathing on the other side.",
+            "sanityCost": 5
+        },
+        {
+            "id": "dark_corner",
+            "label": "Shadow",
+            "rect": {
+                "x": 45,
+                "y": 40,
+                "width": 10,
+                "height": 20
+            },
+            "examineText": "Nothing there. Just shadows.",
+            "examineTextLowSanity": "It moved. I saw it move.",
+            "sanityCost": 8
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "entry_hall",
+            "label": "Back to Entry",
+            "position": {
+                "x": 40,
+                "y": 85,
+                "width": 20,
+                "height": 15
+            }
+        }
+    ]
+}

@@ -1,0 +1,265 @@
+'use client';
+
+import { useEffect, useState, useRef, useCallback } from 'react';
+import { useGameState } from '@/app/hooks/useGameState';
+import { useAudio } from '@/app/hooks/useAudio';
+import { getScene } from '@/app/lib/scenes';
+import { DialogueBox } from './DialogueBox';
+import { Interactable, HorrorEvent, SceneData } from '@/app/types';
+import { motion } from 'framer-motion';
+import { useAmbientEvents } from '@/app/hooks/useAmbientEvents';
+
+export const GameCanvas = () => {
+    const { currentSceneId, sanity, decreaseSanity, addItem, setFlag, flags, inventory, setScene, events, triggerEvent } = useGameState();
+    const { playAmbient, playSfx } = useAudio();
+    const [activeDialogue, setActiveDialogue] = useState<string | null>(null);
+    const [sceneData, setSceneData] = useState(getScene(currentSceneId));
+
+    // Timer refs for cleanup
+    const eventTimers = useRef<NodeJS.Timeout[]>([]);
+
+    // Helper to process an event's effects
+    const processEvent = useCallback((event: HorrorEvent) => {
+        if (event.oneTime && events?.includes(event.id)) return;
+
+        // Check requirements
+        if (event.requires) {
+            if (event.requires.storyFlag && !flags[event.requires.storyFlag]) return;
+            if (event.requires.item && !inventory.includes(event.requires.item)) return;
+            if (event.requires.sanityBelow && sanity >= event.requires.sanityBelow) return;
+        }
+
+        // Apply Effects
+        const executeEffects = () => {
+            if (event.audio) playSfx(event.audio);
+            if (event.sanityCost) decreaseSanity(event.sanityCost);
+            if (event.message) setActiveDialogue(event.message);
+
+            if (event.screenEffect) {
+                console.log(`Triggering screen effect: ${event.screenEffect}`);
+                // Future: Dispatch custom event for visual effects overlay
+            }
+
+            if (event.teleportTo) {
+                setTimeout(() => setScene(event.teleportTo!), 500);
+            }
+
+            if (event.revealInteractable) {
+                setFlag(`revealed_${event.revealInteractable}`, true);
+            }
+            if (event.hideInteractable) {
+                setFlag(`hidden_${event.hideInteractable}`, true);
+            }
+
+            if (event.oneTime) {
+                triggerEvent(event.id);
+            }
+        };
+
+        if (event.delay) {
+            const timer = setTimeout(executeEffects, event.delay);
+            eventTimers.current.push(timer);
+        } else {
+            executeEffects();
+        }
+    }, [events, flags, inventory, sanity, playSfx, decreaseSanity, setScene, triggerEvent, setFlag]);
+
+    // Integrate Ambient Events
+    useAmbientEvents(processEvent);
+
+
+    // Update scene data when ID changes & Setup Trigger Monitors
+    useEffect(() => {
+        // Clear previous timers
+        eventTimers.current.forEach(clearTimeout);
+        eventTimers.current = [];
+
+        const data = getScene(currentSceneId);
+        setSceneData(data);
+
+        if (data?.ambientAudio) {
+            playAmbient(data.ambientAudio);
+        }
+
+        if (!data) return;
+
+        // Process 'on_enter' events
+        data.events?.filter(e => e.trigger === 'on_enter').forEach(processEvent);
+
+        // Setup 'on_timer' events
+        data.events?.filter(e => e.trigger === 'on_timer').forEach(e => {
+            if (e.timerDuration) {
+                const timer = setTimeout(() => processEvent(e), e.timerDuration * 1000);
+                eventTimers.current.push(timer);
+            }
+        });
+
+        // Cleanup function
+        return () => {
+            eventTimers.current.forEach(clearTimeout);
+        };
+
+    }, [currentSceneId, playAmbient, processEvent]);
+
+    // Monitor Sanity & Flags for passive triggers
+    useEffect(() => {
+        if (!sceneData?.events) return;
+
+        // on_sanity_threshold
+        sceneData.events.filter(e => e.trigger === 'on_sanity_threshold').forEach(e => {
+            if (e.sanityThreshold && sanity <= e.sanityThreshold) {
+                processEvent(e);
+            }
+        });
+
+        // on_storyFlag logic
+        sceneData.events.filter(e => e.trigger === 'on_storyFlag').forEach(e => {
+            if (e.flag && flags[e.flag]) {
+                processEvent(e);
+            }
+        });
+
+    }, [sanity, flags, sceneData, processEvent]);
+
+
+    // Handle Interaction
+    const handleInteract = (item: Interactable) => {
+        if (activeDialogue) return;
+
+        // Check requirements
+        if (item.requiredFlag && !flags[item.requiredFlag]) return;
+
+        // Resolve Text (String or Object)
+        let text = "";
+        if (sanity < 50 && item.examineTextLowSanity) {
+            text = item.examineTextLowSanity;
+        } else {
+            text = item.examineText;
+        }
+
+        // Sanity Cost
+        if (item.sanityCost) {
+            decreaseSanity(item.sanityCost);
+        }
+
+        // Audio
+        if (item.audioTrigger) {
+            playSfx(item.audioTrigger);
+        }
+
+        setActiveDialogue(text);
+
+        // Items/Flags
+        if (item.givesItem && !inventory.includes(item.givesItem)) {
+            addItem(item.givesItem);
+        }
+        if (item.setsFlag) {
+            setFlag(item.setsFlag, true);
+        }
+        if (item.storyFlag) {
+            setFlag(item.storyFlag, true);
+        }
+
+        // Handle Reveal Logic (for items that reveal others)
+        if (item.reveals) {
+            item.reveals.forEach(revealId => {
+                setFlag(`revealed_${revealId}`, true);
+            });
+        }
+
+        // Trigger Linked Event (support both 'triggerEvent' and legacy/alt 'event')
+        const eventId = item.triggerEvent;
+        if (eventId && sceneData?.events) {
+            const event = sceneData.events.find(e => e.id === eventId);
+            if (event) processEvent(event);
+        }
+    };
+
+
+    const handleNavigation = (nav: SceneData['navigation'][0]) => {
+        if (nav.requiredFlag && !flags[nav.requiredFlag]) {
+            setActiveDialogue(nav.lockedText || "Locked.");
+            playSfx('/audio/locked.mp3');
+            return;
+        }
+        setScene(nav.targetSceneId);
+    };
+
+    // Determine Background Image
+    const bgImage = (sanity < 40 && sceneData?.backgroundImageLowSanity)
+        ? sceneData.backgroundImageLowSanity
+        : sceneData?.backgroundImage;
+
+    if (!sceneData) return <div className="text-faded text-center mt-20">Loading...</div>;
+
+    return (
+        <div className="relative w-full h-full bg-abyss-black overflow-hidden select-none">
+            {/* Background Layer */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
+                style={{ backgroundImage: `url(${bgImage})` }}
+            >
+                <div className="absolute inset-0 bg-black/20 animate-pulse-slow" />
+            </motion.div>
+
+            {/* Interactables Layer */}
+            <div className="absolute inset-0">
+                {sceneData.interactables.map((item) => {
+                    // Standard visibility check
+                    if (item.requiredFlag && !flags[item.requiredFlag]) return null;
+
+                    // Reveal mechanics check: 
+                    // If item requires reveal, check if strict 'revealed_ID' flag is set
+                    if (item.requiresReveal && !flags[`revealed_${item.id}`]) return null;
+
+                    // Hide mechanics check:
+                    if (flags[`hidden_${item.id}`]) return null;
+
+                    return (
+                        <div
+                            key={item.id}
+                            className="absolute cursor-help hover:bg-white/5 transition-colors duration-300 rounded-full"
+                            style={{
+                                left: `${item.rect.x}%`,
+                                top: `${item.rect.y}%`,
+                                width: `${item.rect.width}%`,
+                                height: `${item.rect.height}%`,
+                            }}
+                            onClick={() => handleInteract(item)}
+                        />
+                    );
+                })}
+            </div>
+
+            {/* Navigation Layer */}
+            <div className="absolute inset-0 pointer-events-none">
+                {sceneData.navigation.map((nav) => (
+                    <div
+                        key={nav.targetSceneId}
+                        className="absolute pointer-events-auto cursor-pointer hover:bg-blue-500/10 transition-colors duration-300 border border-transparent hover:border-blue-500/30"
+                        style={{
+                            left: `${nav.position.x}%`,
+                            top: `${nav.position.y}%`,
+                            width: `${nav.position.width}%`,
+                            height: `${nav.position.height}%`,
+                        }}
+                        onClick={() => handleNavigation(nav)}
+                    >
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/50 text-xs tracking-widest opacity-0 hover:opacity-100 transition-opacity">
+                            {nav.label}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* UI Layer */}
+            <DialogueBox
+                text={activeDialogue}
+                onDismiss={() => setActiveDialogue(null)}
+            />
+        </div>
+    );
+};

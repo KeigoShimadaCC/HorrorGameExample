@@ -1,0 +1,64 @@
+{
+    "id": "kitchen",
+    "name": "Kitchen",
+    "backgroundImage": "/images/scenes/kitchen.png",
+    "backgroundImageLowSanity": "/images/scenes/kitchen_distorted.png",
+    "ambientAudio": "/audio/dripping_water.mp3",
+    "interactables": [
+        {
+            "id": "fridge",
+            "label": "Refrigerator",
+            "rect": {
+                "x": 15,
+                "y": 25,
+                "width": 20,
+                "height": 55
+            },
+            "examineText": "It smells like something died in there. The hum is deafening.",
+            "examineTextLowSanity": "I can hear it breathing. Don't open it.",
+            "sanityCost": 5
+        },
+        {
+            "id": "dirty_dishes",
+            "label": "Sink",
+            "rect": {
+                "x": 45,
+                "y": 45,
+                "width": 15,
+                "height": 10
+            },
+            "examineText": "Piles of rotting food. Analyzing the decay... maybe weeks old?",
+            "sanityCost": 3
+        },
+        {
+            "id": "table_knife",
+            "label": "Rusty Knife",
+            "rect": {
+                "x": 70,
+                "y": 55,
+                "width": 10,
+                "height": 5
+            },
+            "examineText": "Old and jagged. Dangerous.",
+            "collectible": {
+                "itemId": "rusty_knife",
+                "name": "Rusty Knife",
+                "description": "A serrated knife covered in... rust? Or dried blood.",
+                "content": "It feels heavy in your hand."
+            },
+            "sanityCost": 2
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "hallway",
+            "label": "Back to Hallway",
+            "position": {
+                "x": 40,
+                "y": 85,
+                "width": 20,
+                "height": 15
+            }
+        }
+    ]
+}

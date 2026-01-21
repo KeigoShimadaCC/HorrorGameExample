@@ -1,0 +1,72 @@
+{
+    "id": "bathroom",
+    "name": "Bathroom",
+    "backgroundImage": "/images/scenes/bathroom.jpg",
+    "ambientAudio": "/audio/ambient/dripping_water.mp3",
+    "interactables": [
+        {
+            "id": "mirror",
+            "label": "Mirror",
+            "rect": {
+                "x": 40,
+                "y": 25,
+                "width": 20,
+                "height": 35
+            },
+            "examineText": {
+                "default": "You wipe the fog. Your reflection stares back. It blinks a moment after you do.",
+                "lowSanity": "You wipe the fog. Your reflection doesn't move. It smiles. You're not smiling."
+            },
+            "sanityCost": 12,
+            "triggerEvent": "mirror_scare"
+        },
+        {
+            "id": "bathtub",
+            "label": "Bathtub",
+            "rect": {
+                "x": 60,
+                "y": 50,
+                "width": 30,
+                "height": 30
+            },
+            "examineText": {
+                "default": "Empty. A dark stain rings the bottom. Hair clogs the drain—too much hair.",
+                "lowSanity": "Water. There's water now. Something is under the surface. Long hair spreads like ink. A hand reaches up—"
+            },
+            "sanityCost": 18,
+            "triggerEvent": "bathtub_hand",
+            "requiredFlag": "seen_entity_origin"
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "hallway",
+            "label": "Back to Hallway",
+            "position": {
+                "x": 10,
+                "y": 50,
+                "width": 10,
+                "height": 40
+            }
+        }
+    ],
+    "events": [
+        {
+            "id": "mirror_scare",
+            "trigger": "on_examine",
+            "audio": "/audio/sfx/tap.mp3",
+            "delay": 1500,
+            "oneTime": true
+        },
+        {
+            "id": "bathtub_hand",
+            "trigger": "on_examine",
+            "audio": "/audio/sfx/splash_scream.mp3",
+            "screenEffect": "flash_black",
+            "sanityCost": 20,
+            "teleportTo": "hallway",
+            "message": "You wake on the hallway floor. Your clothes are dry. Were they always dry?",
+            "oneTime": true
+        }
+    ]
+}

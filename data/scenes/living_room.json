@@ -1,0 +1,58 @@
+{
+    "id": "living_room",
+    "name": "Living Room",
+    "backgroundImage": "/images/scenes/living_room.png",
+    "backgroundImageLowSanity": "/images/scenes/living_room_red.png",
+    "ambientAudio": "/audio/tv_static.mp3",
+    "interactables": [
+        {
+            "id": "tv",
+            "label": "Old TV",
+            "rect": {
+                "x": 35,
+                "y": 40,
+                "width": 30,
+                "height": 25
+            },
+            "examineText": "Just static. It's not plugged in.",
+            "examineTextLowSanity": "I see faces in the noise. They are screaming.",
+            "sanityCost": 10
+        },
+        {
+            "id": "family_photo",
+            "label": "Portrait",
+            "rect": {
+                "x": 10,
+                "y": 30,
+                "width": 10,
+                "height": 15
+            },
+            "examineText": " A happy family. Wait, why are their faces scratched out?",
+            "sanityCost": 5
+        },
+        {
+            "id": "window",
+            "label": "Window",
+            "rect": {
+                "x": 80,
+                "y": 20,
+                "width": 15,
+                "height": 40
+            },
+            "examineText": "Pitch black outside. No stars.",
+            "sanityCost": 1
+        }
+    ],
+    "navigation": [
+        {
+            "targetSceneId": "hallway",
+            "label": "Back to Hallway",
+            "position": {
+                "x": 40,
+                "y": 85,
+                "width": 20,
+                "height": 15
+            }
+        }
+    ]
+}

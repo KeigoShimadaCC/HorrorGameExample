@@ -1,0 +1,61 @@
+{
+  "id": "entry_hall",
+  "name": "Entry Hall",
+  "backgroundImage": "/images/scenes/entry_hall.png",
+  "backgroundImageLowSanity": "/images/scenes/entry_hall_distorted.png",
+  "ambientAudio": "/audio/rain_indoor.mp3",
+  "interactables": [
+    {
+      "id": "shoes",
+      "label": "Strange Shoes",
+      "rect": {
+        "x": 10,
+        "y": 70,
+        "width": 15,
+        "height": 10
+      },
+      "examineText": "Muddy shoes. They look too large for anyone in your family.",
+      "sanityCost": 5,
+      "audioTrigger": "/audio/sfx/step_squelch.mp3"
+    },
+    {
+      "id": "mail_pile",
+      "label": "Mail",
+      "rect": {
+        "x": 60,
+        "y": 65,
+        "width": 10,
+        "height": 5
+      },
+      "examineText": "Bills, flyers, and... a letter from Grandmother.",
+      "givesItem": "grandmother_letter"
+    },
+    {
+      "id": "family_photo",
+      "label": "Photo",
+      "rect": {
+        "x": 40,
+        "y": 30,
+        "width": 10,
+        "height": 15
+      },
+      "examineText": "A family portrait. Why is your face scratched out?",
+      "examineTextLowSanity": "They are all looking at you. Why are they looking at you?",
+      "sanityCost": 10
+    }
+  ],
+  "navigation": [
+    {
+      "targetSceneId": "hallway",
+      "label": "To Hallway",
+      "position": {
+        "x": 80,
+        "y": 20,
+        "width": 15,
+        "height": 60
+      },
+      "requiredFlag": "read_letter",
+      "lockedText": "I shouldn't leave until I check the mail."
+    }
+  ]
+}

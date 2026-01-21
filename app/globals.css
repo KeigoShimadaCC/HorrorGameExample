@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050505;
+  --foreground: #e5e5e5;
+  --font-inter: 'Inter', sans-serif;
+  --font-noto-serif: 'Noto Serif JP', serif;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter);
+  overflow: hidden; /* Prevent scrolling for immersive experience */
+}
+
+/* J-Horror Typography classes */
+.font-serif-jp {
+  font-family: var(--font-noto-serif);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+}
