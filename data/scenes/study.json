@@ -3,7 +3,7 @@
     "name": "Study",
     "backgroundImage": "/images/scenes/study.png",
     "backgroundImageLowSanity": "/images/scenes/study.png",
-    "ambientAudio": "ambient_tension_8bit",
+    "ambientAudio": "ambient_hallway_wrong",
     "interactables": [
         {
             "id": "bookshelf_normal",

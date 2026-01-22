@@ -3,7 +3,7 @@
     "name": "Grandmother's Room",
     "backgroundImage": "/images/scenes/grandmothers_room.png",
     "backgroundImageLowSanity": "/images/scenes/grandmothers_room.png",
-    "ambientAudio": "ambient_dread_8bit",
+    "ambientAudio": "ambient_hallway_wrong",
     "interactables": [
         {
             "id": "butsudan",

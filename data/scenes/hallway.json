@@ -3,7 +3,7 @@
     "name": "Hallway",
     "backgroundImage": "/images/scenes/hallway.png",
     "backgroundImageLowSanity": "/images/scenes/hallway_distorted.png",
-    "ambientAudio": "ambient_dread_8bit",
+    "ambientAudio": "ambient_hallway_wrong",
     "interactables": [
         {
             "id": "fusuma_left",

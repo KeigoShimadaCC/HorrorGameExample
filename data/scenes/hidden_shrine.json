@@ -3,7 +3,7 @@
     "name": "Hidden Shrine",
     "backgroundImage": "/images/scenes/hidden_shrine.png",
     "backgroundImageLowSanity": "/images/scenes/hidden_shrine.png",
-    "ambientAudio": "ambient_tension_8bit",
+    "ambientAudio": "ambient_shrine_ritual",
     "interactables": [
         {
             "id": "altar",

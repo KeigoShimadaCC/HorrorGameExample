@@ -3,7 +3,7 @@
     "name": "Storage Closet",
     "backgroundImage": "/images/scenes/storage_closet.png",
     "backgroundImageLowSanity": "/images/scenes/storage_closet.png",
-    "ambientAudio": "ambient_dread_8bit",
+    "ambientAudio": "ambient_panic_low",
     "interactables": [
         {
             "id": "salt_pouch",

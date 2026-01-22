@@ -28,6 +28,10 @@ const AUDIO_MANIFEST: Record<string, { file: string; fallback: 'silence' | 'beep
     "ambient_dread_8bit": { file: "/audio/ambient/ambient_dread_8bit.wav", fallback: "noise" },
     "ambient_distant_16bit": { file: "/audio/ambient/ambient_distant_16bit.wav", fallback: "noise" },
     "ambient_tension_8bit": { file: "/audio/ambient/ambient_tension_8bit.wav", fallback: "noise" },
+    "ambient_entry_unease": { file: "/audio/ambient/ambient_entry_unease.wav", fallback: "noise" },
+    "ambient_hallway_wrong": { file: "/audio/ambient/ambient_hallway_wrong.wav", fallback: "noise" },
+    "ambient_shrine_ritual": { file: "/audio/ambient/ambient_shrine_ritual.wav", fallback: "noise" },
+    "ambient_panic_low": { file: "/audio/ambient/ambient_panic_low.wav", fallback: "noise" },
 
     // SFX
     "tv_static_scream": { file: "/audio/sfx/tv_scream.mp3", fallback: "beep" },
@@ -51,6 +55,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     const [volume, setVolume] = useState(0.5);
     const [isMuted, setIsMuted] = useState(false);
     const [isUnlocked, setIsUnlocked] = useState(false);
+    const isUnlockedRef = useRef(false);
 
     const ambientRef = useRef<HTMLAudioElement | null>(null);
     const audioCtxRef = useRef<AudioContext | null>(null);
@@ -154,12 +159,13 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const unlockAudio = () => {
-        if (isUnlocked) return;
+        if (isUnlockedRef.current) return;
         if (audioCtxRef.current?.state === 'suspended') {
             audioCtxRef.current.resume().catch(() => {
                 // Ignore unlock failures; user can retry.
             });
         }
+        isUnlockedRef.current = true;
         setIsUnlocked(true);
         if (pendingAmbientRef.current) {
             const key = pendingAmbientRef.current;
@@ -170,7 +176,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
 
     const playAmbient = (keyOrPath: string) => {
         if (!ambientRef.current) return;
-        if (!isUnlocked) {
+        if (!isUnlockedRef.current) {
             pendingAmbientRef.current = keyOrPath;
             return;
         }
@@ -207,7 +213,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const playSfx = (keyOrPath: string) => {
-        if (!isUnlocked) {
+        if (!isUnlockedRef.current) {
             unlockAudio();
         }
         let path = keyOrPath;

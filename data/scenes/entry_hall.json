@@ -3,7 +3,7 @@
     "name": "Entry Hall",
     "backgroundImage": "/images/scenes/entry_hall.png",
     "backgroundImageLowSanity": "/images/scenes/entry_hall_distorted.png",
-    "ambientAudio": "ambient_distant_16bit",
+    "ambientAudio": "ambient_entry_unease",
     "interactables": [
         {
             "id": "shoes",
