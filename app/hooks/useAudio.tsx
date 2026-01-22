@@ -25,6 +25,9 @@ const AUDIO_MANIFEST: Record<string, { file: string; fallback: 'silence' | 'beep
     "study_silence_clock": { file: "/audio/ambient/clock_tick.mp3", fallback: "noise" },
     "creaking_wood": { file: "/audio/ambient/creaking_wood.mp3", fallback: "noise" },
     "tv_static": { file: "/audio/ambient/tv_static.mp3", fallback: "noise" },
+    "ambient_dread_8bit": { file: "/audio/ambient/ambient_dread_8bit.wav", fallback: "noise" },
+    "ambient_distant_16bit": { file: "/audio/ambient/ambient_distant_16bit.wav", fallback: "noise" },
+    "ambient_tension_8bit": { file: "/audio/ambient/ambient_tension_8bit.wav", fallback: "noise" },
 
     // SFX
     "tv_static_scream": { file: "/audio/sfx/tv_scream.mp3", fallback: "beep" },
@@ -38,6 +41,9 @@ const AUDIO_MANIFEST: Record<string, { file: string; fallback: 'silence' | 'beep
     "locked": { file: "/audio/sfx/locked.mp3", fallback: "knock" },
     "old_phone_ring": { file: "/audio/sfx/phone_ring.mp3", fallback: "beep" },
     "step_squelch": { file: "/audio/sfx/step_squelch.mp3", fallback: "knock" },
+    "stinger_hit": { file: "/audio/sfx/stinger_hit.wav", fallback: "beep" },
+    "tension_rise": { file: "/audio/sfx/tension_rise.wav", fallback: "beep" },
+    "glitch_burst": { file: "/audio/sfx/glitch_burst.wav", fallback: "beep" },
 };
 
 export const AudioProvider = ({ children }: { children: ReactNode }) => {

@@ -3,7 +3,7 @@
     "name": "Storage Closet",
     "backgroundImage": "/images/scenes/storage_closet.png",
     "backgroundImageLowSanity": "/images/scenes/storage_closet.png",
-    "ambientAudio": "room_silence_breathing",
+    "ambientAudio": "ambient_dread_8bit",
     "interactables": [
         {
             "id": "salt_pouch",
@@ -48,7 +48,7 @@
             "id": "closet_onryo",
             "trigger": "on_timer",
             "timerDuration": 22,
-            "audio": "breathing_close",
+            "audio": "stinger_hit",
             "screenEffect": "flash_black",
             "message": "A woman in soaked funeral robes fills the doorway. Her hair crawls across the floor toward you.",
             "setsFlag": "killed_by_onryo",

@@ -3,7 +3,7 @@
     "name": "Utility Room",
     "backgroundImage": "/images/scenes/utility_room.png",
     "backgroundImageLowSanity": "/images/scenes/utility_room.png",
-    "ambientAudio": "room_silence_breathing",
+    "ambientAudio": "ambient_dread_8bit",
     "interactables": [
         {
             "id": "breaker_panel",

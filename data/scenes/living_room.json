@@ -3,7 +3,7 @@
     "name": "Living Room",
     "backgroundImage": "/images/scenes/living_room.png",
     "backgroundImageLowSanity": "/images/scenes/living_room.png",
-    "ambientAudio": "tv_static",
+    "ambientAudio": "ambient_tension_8bit",
     "interactables": [
         {
             "id": "tv",

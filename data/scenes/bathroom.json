@@ -3,7 +3,7 @@
     "name": "Bathroom",
     "backgroundImage": "/images/scenes/bathroom.png",
     "backgroundImageLowSanity": "/images/scenes/bathroom_distorted.png",
-    "ambientAudio": "dripping_water",
+    "ambientAudio": "ambient_dread_8bit",
     "interactables": [
         {
             "id": "mirror",

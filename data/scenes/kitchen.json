@@ -3,7 +3,7 @@
     "name": "Kitchen",
     "backgroundImage": "/images/scenes/kitchen.png",
     "backgroundImageLowSanity": "/images/scenes/kitchen.png",
-    "ambientAudio": "dripping_water",
+    "ambientAudio": "ambient_distant_16bit",
     "interactables": [
         {
             "id": "fridge",

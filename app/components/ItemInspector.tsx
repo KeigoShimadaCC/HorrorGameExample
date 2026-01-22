@@ -21,7 +21,11 @@ export const ItemInspector = ({ item, onClose }: ItemInspectorProps) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
-                    onClick={onClose}
+                    onMouseDown={(event) => {
+                        if (event.target === event.currentTarget) {
+                            onClose();
+                        }
+                    }}
                 >
                     <motion.div
                         initial={{ scale: 0.9, y: 20 }}

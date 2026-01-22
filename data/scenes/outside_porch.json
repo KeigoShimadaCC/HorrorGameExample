@@ -3,7 +3,7 @@
     "name": "Outside Porch",
     "backgroundImage": "/images/scenes/outside_porch.png",
     "backgroundImageLowSanity": "/images/scenes/outside_porch.png",
-    "ambientAudio": "entry_rain",
+    "ambientAudio": "ambient_distant_16bit",
     "interactables": [
         {
             "id": "car",
