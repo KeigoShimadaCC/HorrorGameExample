@@ -9,10 +9,10 @@
             "id": "fridge",
             "label": "Refrigerator",
             "rect": {
-                "x": 20.0,
-                "y": 37.56,
-                "width": 22.0,
-                "height": 67.56
+                "x": 20,
+                "y": 38,
+                "width": 23,
+                "height": 52
             },
             "examineText": "It smells like something died in there. The hum is deafening.",
             "examineTextLowSanity": "I can hear it breathing. Don't open it.",
@@ -22,10 +22,10 @@
             "id": "dirty_dishes",
             "label": "Sink",
             "rect": {
-                "x": 43.0,
-                "y": 58.89,
-                "width": 32.0,
-                "height": 32.0
+                "x": 43,
+                "y": 57,
+                "width": 32,
+                "height": 32
             },
             "examineText": "Piles of rotting food. Analyzing the decay... maybe weeks old?",
             "sanityCost": 3
@@ -34,10 +34,10 @@
             "id": "table_knife",
             "label": "Rusty Knife",
             "rect": {
-                "x": 76.0,
-                "y": 78.0,
-                "width": 18.0,
-                "height": 18.0
+                "x": 76,
+                "y": 68,
+                "width": 18,
+                "height": 18
             },
             "examineText": "Old and jagged. Dangerous.",
             "givesItem": "rusty_knife",
@@ -49,10 +49,10 @@
             "targetSceneId": "hallway",
             "label": "Back to Hallway",
             "position": {
-                "x": 80.0,
-                "y": 5.0,
-                "width": 15.0,
-                "height": 20.0
+                "x": 0,
+                "y": 12,
+                "width": 16,
+                "height": 77
             }
         }
     ]

@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  background: #0b0b0d;
+  color: #e5e5e5;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  background: #121214;
+  color: #e5e5e5;
+  border: 1px solid #2b2b2f;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+button {
+  background: #1a1a1f;
+  color: #e5e5e5;
+  border: 1px solid #2b2b2f;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #5b5b66;
+}

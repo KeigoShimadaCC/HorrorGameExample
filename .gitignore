@@ -12,6 +12,10 @@
 # next.js
 /.next/
 /out/
+editor/.next/
+
+# editor dependencies
+editor/node_modules/
 
 # production
 /build

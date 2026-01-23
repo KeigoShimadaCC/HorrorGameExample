@@ -9,10 +9,10 @@
             "id": "car",
             "label": "Car",
             "rect": {
-                "x": 60.0,
-                "y": 50.0,
-                "width": 25.0,
-                "height": 53.33
+                "x": 49,
+                "y": 52,
+                "width": 31,
+                "height": 23
             },
             "examineText": "The car is soaked. The door handle is cold and slick.",
             "requiredItem": "car_keys",
@@ -26,20 +26,20 @@
             "targetSceneId": "entry_hall",
             "label": "Back Inside",
             "position": {
-                "x": 10.0,
-                "y": 85.56,
-                "width": 15.0,
-                "height": 35.56
+                "x": 9,
+                "y": 10,
+                "width": 9,
+                "height": 80
             }
         },
         {
             "targetSceneId": "hidden_shrine",
             "label": "Toward the Shrine",
             "position": {
-                "x": 80.0,
-                "y": -3.33,
-                "width": 15.0,
-                "height": 44.44
+                "x": 32,
+                "y": 52,
+                "width": 16,
+                "height": 17
             },
             "requiredFlag": "found_shrine_map",
             "lockedText": "You cannot find the shrine without the map."

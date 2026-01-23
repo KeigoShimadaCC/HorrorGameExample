@@ -9,10 +9,10 @@
             "id": "bookshelf_normal",
             "label": "Bookshelf",
             "rect": {
-                "x": 10.0,
-                "y": -3.33,
-                "width": 25.0,
-                "height": 106.67
+                "x": 0,
+                "y": 9,
+                "width": 27,
+                "height": 76
             },
             "examineText": "Academic texts. Physics. Astronomy. Marine biology. One shelf is dedicated to folklore: 'Innsmouth', 'The Dunwich Horror', 'Deep Ones of the Pacific'. Fiction?",
             "examineTextLowSanity": "The books rearrange themselves when you're not looking. The folklore section has expanded. Your name is on one of the spines.",
@@ -22,10 +22,10 @@
             "id": "desk",
             "label": "Desk",
             "rect": {
-                "x": 50.0,
-                "y": 50.0,
-                "width": 25.0,
-                "height": 30.0
+                "x": 50,
+                "y": 47,
+                "width": 37,
+                "height": 15
             },
             "examineText": "Grandfather's desk. A half-finished letter: 'The covenant cannot be broken. She made the pact in 1967 to save the village. Every 60 years, the sea demands... The rest is torn away.",
             "examineTextLowSanity": "The letter is complete now. It describes the ritual. It describes YOU. It describes what happens at 3:33 AM. You check your phone. It's 3:32.",
@@ -37,10 +37,10 @@
             "id": "locked_drawer",
             "label": "Locked Drawer",
             "rect": {
-                "x": 55.0,
-                "y": 85.56,
-                "width": 15.0,
-                "height": 17.78
+                "x": 45,
+                "y": 64,
+                "width": 30,
+                "height": 12
             },
             "examineText": "A drawer hidden beneath the desk. A map is folded inside.",
             "requiredItem": "old_key",
@@ -53,10 +53,10 @@
             "id": "strange_book",
             "label": "Strange Book",
             "rect": {
-                "x": 38.0,
-                "y": 23.33,
-                "width": 8.0,
-                "height": 21.33
+                "x": 37,
+                "y": 48,
+                "width": 9,
+                "height": 8
             },
             "examineText": "A book bound in something that isn't leather. The text inside shifts. You can almost read it. You shouldn't read it.",
             "examineTextLowSanity": "You read it. You understand it. You wish you didn't. The geometry of the words rearranges your thoughts. You know what sleeps beneath the waves. You know it's waking.",
@@ -70,20 +70,20 @@
             "targetSceneId": "hallway",
             "label": "Back to Hallway",
             "position": {
-                "x": 80.0,
-                "y": 50.0,
-                "width": 10.0,
-                "height": 71.11
+                "x": 89,
+                "y": 39,
+                "width": 10,
+                "height": 51
             }
         },
         {
             "targetSceneId": "hidden_shrine",
             "label": "Shortcut to Shrine",
             "position": {
-                "x": 55.0,
-                "y": 5.0,
-                "width": 12.0,
-                "height": 18.0
+                "x": 71,
+                "y": 10,
+                "width": 24,
+                "height": 18
             },
             "requiredFlag": "read_diary",
             "lockedText": "The air is thick. You do not yet know the way."

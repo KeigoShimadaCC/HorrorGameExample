@@ -9,10 +9,10 @@
             "id": "tv",
             "label": "Old TV",
             "rect": {
-                "x": 35.0,
-                "y": 32.22,
-                "width": 30.0,
-                "height": 44.44
+                "x": 35,
+                "y": 54,
+                "width": 13,
+                "height": 15
             },
             "examineText": "Just static. It's not plugged in.",
             "examineTextLowSanity": "I see faces in the noise. They are screaming.",
@@ -25,10 +25,10 @@
             "id": "behind_sofa",
             "label": "Behind Sofa",
             "rect": {
-                "x": 15.0,
-                "y": 94.44,
-                "width": 20.0,
-                "height": 21.33
+                "x": 58,
+                "y": 58,
+                "width": 39,
+                "height": 23
             },
             "examineText": "There's a damp trail behind the sofa. Something brushed past you.",
             "requiredFlag": "saw_shadow_behind_you",
@@ -38,10 +38,10 @@
             "id": "family_photo",
             "label": "Portrait",
             "rect": {
-                "x": 10.0,
-                "y": 14.44,
-                "width": 10.0,
-                "height": 26.67
+                "x": 13,
+                "y": 30,
+                "width": 11,
+                "height": 21
             },
             "examineText": " A happy family. Wait, why are their faces scratched out?",
             "sanityCost": 5
@@ -50,10 +50,10 @@
             "id": "window",
             "label": "Window",
             "rect": {
-                "x": 80.0,
-                "y": -3.33,
-                "width": 15.0,
-                "height": 71.11
+                "x": 65,
+                "y": 25,
+                "width": 21,
+                "height": 33
             },
             "examineText": "Pitch black outside. No stars.",
             "sanityCost": 1
@@ -62,10 +62,10 @@
             "id": "sofa_keys",
             "label": "Car Keys",
             "rect": {
-                "x": 55.0,
-                "y": 85.56,
-                "width": 10.0,
-                "height": 14.22
+                "x": 59,
+                "y": 81,
+                "width": 19,
+                "height": 6
             },
             "examineText": "A set of keys half-buried in the cushions. The tag reads: 'Sea Shrine.'",
             "givesItem": "car_keys",
@@ -77,10 +77,10 @@
             "targetSceneId": "hallway",
             "label": "Back to Hallway",
             "position": {
-                "x": 80.0,
-                "y": 75.0,
-                "width": 15.0,
-                "height": 20.0
+                "x": 0,
+                "y": 29,
+                "width": 7,
+                "height": 59
             }
         }
     ],

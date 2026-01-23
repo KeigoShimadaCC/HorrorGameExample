@@ -9,10 +9,10 @@
             "id": "altar",
             "label": "Stone Altar",
             "rect": {
-                "x": 35.0,
-                "y": 32.22,
-                "width": 30.0,
-                "height": 53.33
+                "x": 23,
+                "y": 51,
+                "width": 51,
+                "height": 38
             },
             "examineText": "The altar is damp. The carvings match the map.",
             "requiredItem": "ritual_talisman",
@@ -27,10 +27,10 @@
             "targetSceneId": "outside_porch",
             "label": "Back to the House",
             "position": {
-                "x": 10.0,
-                "y": 85.56,
-                "width": 15.0,
-                "height": 35.56
+                "x": 0,
+                "y": 55,
+                "width": 15,
+                "height": 36
             }
         }
     ],
