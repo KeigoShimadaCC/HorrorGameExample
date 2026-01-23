@@ -13,11 +13,13 @@ import { useEffect, useState } from "react";
 import { Ending } from "./lib/endings";
 import { AudioControls } from "./components/AudioControls";
 import { TitleScreen } from "./components/TitleScreen";
+import { IntroScreen } from "./components/IntroScreen";
 
 export default function Home() {
   const gameState = useGameState();
   const [activeEnding, setActiveEnding] = useState<Ending | null>(null);
   const [hasStarted, setHasStarted] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
 
   // Check ending conditions on state change
   useEffect(() => {
@@ -31,6 +33,13 @@ export default function Home() {
     <main className="relative w-screen h-screen overflow-hidden bg-abyss-black text-foreground">
       {!hasStarted ? (
         <TitleScreen onStart={() => setHasStarted(true)} />
+      ) : showIntro ? (
+        <IntroScreen
+          onFinish={() => {
+            setShowIntro(false);
+            gameState.setScene('entry_hall');
+          }}
+        />
       ) : activeEnding ? (
         <EndingScreen
           ending={activeEnding}

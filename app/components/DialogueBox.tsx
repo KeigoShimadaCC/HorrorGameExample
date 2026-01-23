@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useGameState } from '@/app/hooks/useGameState';
 
 interface DialogueBoxProps {
@@ -11,6 +12,29 @@ interface DialogueBoxProps {
 export const DialogueBox = ({ text, onDismiss }: DialogueBoxProps) => {
     const { sanity } = useGameState();
     const isLowSanity = sanity < 40;
+    const [showHint, setShowHint] = useState(false);
+
+    useEffect(() => {
+        if (!text) {
+            setShowHint(false);
+            return;
+        }
+        setShowHint(false);
+        const timer = setTimeout(() => setShowHint(true), 20000);
+        return () => clearTimeout(timer);
+    }, [text]);
+
+    useEffect(() => {
+        if (!text) return;
+        const handleKey = (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                onDismiss();
+            }
+        };
+        window.addEventListener('keydown', handleKey);
+        return () => window.removeEventListener('keydown', handleKey);
+    }, [text, onDismiss]);
 
     return (
         <AnimatePresence>
@@ -37,11 +61,13 @@ export const DialogueBox = ({ text, onDismiss }: DialogueBoxProps) => {
                         <p className={`text-lg leading-relaxed ${isLowSanity ? "font-serif tracking-wide" : "font-serif"}`}>
                             {text}
                         </p>
-                        <div className="mt-4 flex justify-end">
-                            <span className={`text-xs animate-pulse ${isLowSanity ? "text-red-200/70 tracking-widest" : "text-faded"}`}>
-                                Click outside to continue
-                            </span>
-                        </div>
+                        {showHint && (
+                            <div className="mt-4 flex justify-end">
+                                <span className={`text-xs animate-pulse ${isLowSanity ? "text-red-200/70 tracking-widest" : "text-faded"}`}>
+                                    Click outside to continue
+                                </span>
+                            </div>
+                        )}
                     </motion.div>
                 </motion.div>
             )}

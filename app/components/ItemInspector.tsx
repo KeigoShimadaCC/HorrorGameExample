@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 import { ItemData } from '@/app/lib/items';
 import { useGameState } from '@/app/hooks/useGameState';
 
@@ -12,6 +13,18 @@ interface ItemInspectorProps {
 export const ItemInspector = ({ item, onClose }: ItemInspectorProps) => {
     const { sanity } = useGameState();
     const isLowSanity = sanity < 40;
+
+    useEffect(() => {
+        if (!item) return;
+        const handleKey = (event: KeyboardEvent) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                onClose();
+            }
+        };
+        window.addEventListener('keydown', handleKey);
+        return () => window.removeEventListener('keydown', handleKey);
+    }, [item, onClose]);
 
     return (
         <AnimatePresence>
